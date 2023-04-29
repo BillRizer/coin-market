@@ -1,16 +1,14 @@
 import React from "react";
 
 import { RoutesComponent } from "./application/router";
-import { ThemeProvider } from "styled-components";
-import { theme } from "./global/styles/theme-base";
-import * as Hook from "./application/hook/theme";
+import AppProvider from "./application/hook/index";
 
 function App() {
   return (
     <>
-      <Hook.Theme>
+      <AppProvider>
         <RoutesComponent></RoutesComponent>
-      </Hook.Theme>
+      </AppProvider>
     </>
   );
 }
