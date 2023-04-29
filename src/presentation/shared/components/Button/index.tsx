@@ -1,30 +1,30 @@
-import React from 'react';
-import {ButtonStyled} from './style';
+import React, { ReactPropTypes } from "react";
+import * as Styled from "./style";
+import { IconComponent } from "../Icon";
 
-interface ButtonProps {
-  primary?: boolean;
-  backgroundColor?: string;
-  size?: 'small' | 'medium' | 'large';
-  label: string;
-  onClick?: () => void;
+interface Props {
+  children: any;
+  onClick?: any;
+  Icon?: any;
+  color?: "primary" | "secondary" | "tertiary";
+  size?: "small" | "medium" | "large";
 }
 
-export const Button = ({
-  primary = false,
-  size = 'medium',
-  backgroundColor,
-  label,
-  ...props
-}: ButtonProps) => {
+export const ButtonComponent = ({
+  children,
+  onClick,
+  Icon,
+  color = "primary",
+  size = "medium",
+}: Props) => {
   return (
-    //['storybook-button', `storybook-button--${size}`, mode].join(' ')
-    <ButtonStyled
-      type="button"
-      className={''}
-      style={{ backgroundColor }}
-      {...props}
-    >
-      {label}
-    </ButtonStyled>
+    <Styled.Button onClick={onClick} color={color} size={size}>
+      {Icon && (
+        <div className="icon">
+          <IconComponent Icon={Icon} size={size} />
+        </div>
+      )}
+      {children}
+    </Styled.Button>
   );
 };
