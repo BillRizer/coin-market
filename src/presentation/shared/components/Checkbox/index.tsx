@@ -1,20 +1,24 @@
 import React, { useState } from "react";
+import * as Styled from "./style";
 
 interface Props {
-  labelOn: string;
-  labelOff: string;
-  onClick?: () => void;
+  onChange?: any;
+  checked?: boolean;
+  children?: string;
 }
 
-export const CheckboxWithLabel = ({ labelOn, labelOff, ...props }: Props) => {
-  const [isChecked, setIsChecked] = useState(false);
-  const onChange = () => {
-    setIsChecked(!isChecked);
-  };
+export const CheckboxComponent = ({
+  onChange,
+  checked ,
+  children,
+  ...props
+}: Props) => {
   return (
-    <label>
-      <input type="checkbox" checked={isChecked} onChange={onChange} />
-      {isChecked ? labelOn : labelOff}
-    </label>
+    <Styled.Container>
+      <Styled.CheckboxSimbol >
+        <input type="checkbox" defaultChecked={checked} onChange={onChange} />
+      </Styled.CheckboxSimbol>
+      <Styled.Text >{children}</Styled.Text>
+    </Styled.Container>
   );
 };
