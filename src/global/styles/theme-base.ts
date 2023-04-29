@@ -1,5 +1,5 @@
-export const themeBase = {
-  name: "theme-base",
+export const theme = {
+  name: "theme",
   colors: {
     primary: {
       base: "#FBAB34",
@@ -7,9 +7,13 @@ export const themeBase = {
     },
     secondary: {
       base: "#8C8A97",
+      w400: "#ACABB7",
     },
     tertiary: {
+      w400: "#8DE8B8",
       base: "#1BD171",
+      w600: "#18B863",
+      w700: "#149E55",
     },
     quartenary: {
       base: "#EC3237",

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { themeBase } from "../../../../global/styles/theme-base";
+import { theme } from "../../../../global/styles/theme-base";
 
 
 export const Container = styled.div`
@@ -25,12 +25,12 @@ export const CheckboxSimbol = styled.div`
     display: block;
     width: 15px;
     height: 15px;
-    border: 1px solid ${themeBase.colors.primary.base};
+    border: 1px solid ${theme.colors.primary.base};
     border-radius: 3px;
     margin-right: 10px;
   }
 
   input[type="checkbox"]:checked:before {
-    background: ${themeBase.colors.primary.w400} !important;
+    background: ${theme.colors.primary.w400} !important;
   }
 `;
