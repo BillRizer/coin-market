@@ -3,8 +3,9 @@ import styled from "styled-components";
 
 export const Close = styled.div`
   position: absolute;
-  right: 5px;
-  top: 5px;
+  right: 10px;
+  top: 10px;
+  color: ${(props) => props.theme.colors.textBase};
 `;
 
 export const Screen = styled.div`

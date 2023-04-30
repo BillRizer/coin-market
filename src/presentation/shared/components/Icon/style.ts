@@ -16,9 +16,9 @@ display: flex;
         font-size: 15px;
     }
     &.large{
-        width: 36px;
-        height: 36px;
-        font-size: 36px;
+        width: 32px;
+        height: 32px;
+        font-size: 32px;
     }
     ${(props) => props.cursorPointer ? `cursor:pointer;`:''}
     &.disabled {

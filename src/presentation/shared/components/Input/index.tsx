@@ -1,7 +1,7 @@
-import React from "react";
+import React, { InputHTMLAttributes } from "react";
 import * as Styled from "./style";
 import { IconComponent } from "../Icon";
-interface Props {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   id: string;
   type: string;
@@ -20,8 +20,9 @@ export const InputComponent = ({
   placeholder,
   error,
   Icon,
+  ...rest
 }: Props) => {
-  const errorMessage = '';
+  const errorMessage = "";
   return (
     <Styled.InputContainer>
       {/* <Styled.Label htmlFor={id}>{label}</Styled.Label> */}
@@ -37,6 +38,7 @@ export const InputComponent = ({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         haveIcon={!!Icon}
+        {...rest}
       />
       {errorMessage && (
         <Styled.ErrorMessage>{errorMessage}</Styled.ErrorMessage>
