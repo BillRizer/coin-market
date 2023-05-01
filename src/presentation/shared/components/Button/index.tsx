@@ -1,8 +1,8 @@
-import React, { ReactPropTypes } from "react";
+import React, { ButtonHTMLAttributes, ReactPropTypes } from "react";
 import * as Styled from "./style";
 import { IconComponent } from "../Icon";
 
-interface Props {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: any;
   onClick?: any;
   Icon?: any;
@@ -16,9 +16,10 @@ export const ButtonComponent = ({
   Icon,
   color = "primary",
   size = "medium",
+  ...rest
 }: Props) => {
   return (
-    <Styled.Button onClick={onClick} color={color} size={size}>
+    <Styled.Button onClick={onClick} color={color} size={size} {...rest}>
       {Icon && (
         <div className="icon">
           <IconComponent Icon={Icon} size={size} />
