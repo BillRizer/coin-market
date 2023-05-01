@@ -1,7 +1,8 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
+import { FooterComponent } from "../components/Footer";
 
-export const LayoutContainer = () => {
+export const LoggedLayoutContainer = () => {
   return (
     <div>
       <nav>
@@ -21,6 +22,7 @@ export const LayoutContainer = () => {
         </ul>
       </nav>
       <Outlet />
+      <FooterComponent isLogged={true}></FooterComponent>
     </div>
   );
 };
