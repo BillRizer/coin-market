@@ -3,7 +3,9 @@ import * as Styled from "./style";
 
 interface Props {
   Icon: any;
-  size: "small" | "medium" | "large";
+  size?: "small" | "medium" | "large";
+  width?: string;
+  height?: string;
   onClick?: any;
   cursorPointer?: boolean;
   disabled?: boolean;
@@ -12,6 +14,8 @@ interface Props {
 export const IconComponent = ({
   Icon,
   size,
+  width,
+  height,
   onClick,
   cursorPointer,
   disabled,
@@ -23,6 +27,7 @@ export const IconComponent = ({
       cursorPointer
       onClick={onClick}
       className={`${disabled && "disabled"} ${size}`}
+      style={{ width, height }}
     >
       {typeof Icon === "string" ? <img src={Icon} alt="" /> : <Icon />}
     </Styled.Icon>
