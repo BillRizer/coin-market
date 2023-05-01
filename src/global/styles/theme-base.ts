@@ -6,6 +6,7 @@ export const theme = {
       w400: "#FFB94F",
     },
     secondary: {
+      w100:'#F6F6F6',
       w300:'#E0DEEA',
       base: "#8C8A97",
       w400: "#ACABB7",
