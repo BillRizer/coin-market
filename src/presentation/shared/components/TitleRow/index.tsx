@@ -1,23 +1,25 @@
-import React, { ReactComponentElement, ReactPropTypes } from "react";
-import * as Styled from "./style";
+import React, {
+  ReactComponentElement,
+  ReactElement,
+  ReactPropTypes,
+} from "react";
+import * as S from "./style";
 import { IconComponent } from "../Icon";
 
 interface Props {
-  Icon?: any;
+  icon?: any;
   title: string;
-  options: any;
+  children?: ReactElement;
 }
 
-export const TitleRowComponent = ({
-  Icon,
-  title,
-  options,
-}: Props) => {
+export const TitleRowComponent = ({ icon, title, children }: Props) => {
   return (
-    <div>
-      {Icon && <IconComponent Icon={Icon} size="large"/>}
-      {title}
-      
-    </div>
+    <S.Container>
+      <div className="left">
+        {icon && <IconComponent Icon={icon} size="large" />}
+        <h4>{title}</h4>
+      </div>
+      <div className="right">{children}</div>
+    </S.Container>
   );
 };
