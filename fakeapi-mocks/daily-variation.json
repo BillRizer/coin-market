@@ -1,0 +1,45 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/v1/daily-variation"
+  },
+  "response": {
+    "body": [
+      {
+        "id": 1,
+        "label": "Bitcoin",
+        "abbreviated": "BTC",
+        "value": 1.1,
+        "historigram": [{}]
+      },
+      {
+        "id": 1,
+        "label": "Ethereum",
+        "abbreviated": "ETH",
+        "value": -5.2,
+        "historigram": [{}]
+      },
+      {
+        "id": 1,
+        "label": "Cardano",
+        "abbreviated": "ADA",
+        "value": 7.1,
+        "historigram": [{}]
+      },
+      {
+        "id": 1,
+        "label": "Solana",
+        "abbreviated": "SOL",
+        "value": -5.8,
+        "historigram": [{}]
+      },
+      {
+        "id": 1,
+        "label": "USD Coin",
+        "abbreviated": "USDC",
+        "value": 9.1,
+        "historigram": [{}]
+      }
+    ]
+  }
+}

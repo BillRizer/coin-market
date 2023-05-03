@@ -1,0 +1,8 @@
+version: '3.1'
+services:
+  faker:
+    image: dotronglong/faker:stable
+    volumes:
+      - $PWD/fakeapi-mocks:/app/mocks
+    ports:
+      - "3030:3030"

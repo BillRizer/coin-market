@@ -1,0 +1,15 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/v1/available-crypto"
+  },
+  "response": {
+    "body": [
+      { "id": 1, "label": "Bitcoin", "abbreviated": "BTC" },
+      { "id": 1, "label": "Ethereum", "abbreviated": "ETH" },
+      { "id": 1, "label": "Cardano", "abbreviated": "ADA" },
+      { "id": 1, "label": "Solana", "abbreviated": "SOL" },
+      { "id": 1, "label": "USD Coin", "abbreviated": "USDC" }
+    ]
+  }
+}
