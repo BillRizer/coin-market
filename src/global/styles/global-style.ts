@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import { theme } from "./theme-base";
+import { device } from "../utils/device";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -7,14 +8,15 @@ body {
   padding: 0;
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial;
 }
-h1,h2,h3,h4,h5,h6,p,.text-label,.text-small-label{
+h1,h2,h3,h4,h5,h6,p,a,.text-label,.text-small-label{
     color: ${(p) => `${p.theme.colors.textBase}`};
     margin: 20px 0;
 }
-p{
+p,a{
     font-size: ${(p) => `${p.theme.fonts.p.size}`};
     line-height: ${(p) => `${p.theme.fonts.p.LineHeight}`};
     letter-spacing: ${(p) => `${p.theme.fonts.p.LetterSpacing}`};
+    text-decoration:none
 }
 .text-label{
     font-size: ${(p) => `${p.theme.fonts.label.size}`};
@@ -33,12 +35,16 @@ h1{
 }
 h2{
     font-size: ${(p) => `${p.theme.fonts.h2.size}`};
+    
 }
 h3{
     font-size: ${(p) => `${p.theme.fonts.h3.size}`};
 }
 h4{
-    font-size: ${(p) => `${p.theme.fonts.h4.size}`};
+    font-size: ${(p) => `${p.theme.fonts.h5.size}`};
+    @media screen and (${device.tablet}) {
+        font-size: ${(p) => `${p.theme.fonts.h4.size}`};
+  }
 }
 h5{
     font-size: ${(p) => `${p.theme.fonts.h5.size}`};
