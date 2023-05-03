@@ -2,7 +2,7 @@ import React from "react";
 import { ModalProvider } from "./modal";
 import { CustomThemeProvider } from "./theme";
 import { useAuth } from "./useAuth";
-import { AuthProvider } from "../contexts/auth";
+import { AuthProvider } from "../contexts/AuthContext";
 
 interface Props {
   children: any;
