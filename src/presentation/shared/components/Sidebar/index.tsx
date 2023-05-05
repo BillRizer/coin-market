@@ -33,7 +33,7 @@ export const SidebarComponent = ({ children, ...rest }: Props) => {
     },
   ];
   return (
-    <S.Container>
+    <S.Container >
       <S.Menu>
         {elements.map((e, k) => (
           <S.Item key={k}>

@@ -14,7 +14,7 @@ export function NumberComponent({
   showSignal = false,
 }: Props) {
   const isPositive = num >= 0;
-  const signal = isPositive ? "+" : "-";
+  const signal = isPositive ? "+" : "";
   const numText = `${prefix}${showSignal ? signal : ""}${num}${sufix}`;
   return <div style={{ color: isPositive ? "green" : "red" }}>{numText}</div>;
 }

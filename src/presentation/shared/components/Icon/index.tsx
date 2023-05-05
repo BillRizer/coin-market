@@ -1,9 +1,9 @@
-import React from "react";
+import React, { HTMLAttributes } from "react";
 import * as Styled from "./style";
 
-interface Props {
+interface Props extends HTMLAttributes<HTMLDivElement> {
   Icon: any;
-  size?: "small" | "medium" | "large";
+  size?: "small" | "medium" | "big" | "large";
   width?: string;
   height?: string;
   onClick?: any;
@@ -26,8 +26,9 @@ export const IconComponent = ({
       data-testid="icon"
       cursorPointer
       onClick={onClick}
-      className={`${disabled && "disabled"} ${size}`}
+      className={`${disabled ? "disabled" : ""} ${size}`}
       style={{ width, height }}
+      {...props}
     >
       {typeof Icon === "string" ? <img src={Icon} alt="" /> : <Icon />}
     </Styled.Icon>

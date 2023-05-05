@@ -14,7 +14,7 @@ export const AvatarComponent = ({ isCompact, image, name, options }: Props) => {
       <S.ImageWrap>
         <img src={image} alt={`Avatar of ${name}`} />
       </S.ImageWrap>
-      {!isCompact && <S.Text>{name}</S.Text>}
+      {!isCompact && <S.Text className="text-label w400">{name}</S.Text>}
     </S.Container>
   );
 };

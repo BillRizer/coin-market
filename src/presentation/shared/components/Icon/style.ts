@@ -15,6 +15,11 @@ display: flex;
         height: 15px;
         font-size: 15px;
     }
+    &.big{
+        width: 24px;
+        height: 24px;
+        font-size: 32px;
+    }
     &.large{
         width: 32px;
         height: 32px;

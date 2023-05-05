@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { device } from "../../../../global/utils/device";
+import { mediaQ } from "../../../../global/utils/media-query";
 
 export const Container = styled.div`
   display: flex;
@@ -10,13 +10,14 @@ export const Container = styled.div`
   }
 `;
 export const Menu = styled.div`
-  & {
-    width: 86px;
-    background: ${(p) => `${p.theme.colors.white}`};
-    height: 100vh;
+  width: 86px;
+  background: ${(p) => `${p.theme.colors.white}`};
+  height: 100vh;
+  display: none;
+
+  /* @media screen and (${mediaQ("tablet","laptop")}) {
     display: block;
-  }
- 
+  } */
 `;
 export const Item = styled.div`
   padding: 12px;
