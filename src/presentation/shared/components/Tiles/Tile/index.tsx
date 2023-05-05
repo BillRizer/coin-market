@@ -17,7 +17,7 @@ export const TileComponent = ({
     <S.Container {...rest}>
       <img src={Icon} alt="" />
       <S.Legend>{legend}</S.Legend>
-      <S.Title>{title}</S.Title>
+      <h4>{title}</h4>
       <p>{text}</p>
     </S.Container>
   );
