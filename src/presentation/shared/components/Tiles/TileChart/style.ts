@@ -1,0 +1,68 @@
+import styled from "styled-components";
+import { device } from "../../../../../global/utils/device";
+import { mediaQ } from "../../../../../global/utils/media-query";
+import { convertPxToRem } from "../../../../../global/utils/parse";
+
+export const Container = styled.div`
+  height: 112px;
+  /* background: #ffffff;
+  display: flex;
+  
+*/
+  @media screen and (${device.mobile}) {
+    max-height: 128px;
+  }
+  .crypticon {
+    margin-right: 8px;
+  }
+`;
+
+export const Left = styled.div`
+  max-width: 93px;
+  display: grid;
+  padding: 8px;
+  height: 100%;
+  grid-template-columns: 1fr;
+  grid-template-rows: 20px 1fr 1fr;
+  grid-template-areas: "t" "c" "a";
+  @media screen and (${device.mobile}) {
+    grid-template-rows: 20px 20px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "t t" "c a";
+    max-width: 100%;
+    height: auto;
+  }
+`;
+export const LineCrypto = styled.div`
+  display: flex;
+  align-items: center;
+  grid-area: c;
+
+  @media screen and (${device.mobile}) {
+    .crypticon {
+      height: 16px;
+    }
+    .text-label {
+      font-size: 12px;
+    }
+  }
+`;
+export const Title = styled.div`
+  font-size: 12px;
+  grid-area: t;
+`;
+export const Amount = styled.div`
+  display: flex;
+  align-items: center;
+  grid-area: a;
+  font-size: 14px;
+`;
+
+export const Right = styled.div<{ backgroundColor?: string }>`
+  background-color: ${(p) =>
+    p.backgroundColor ? p.backgroundColor : p.theme.colors.primary.w100};
+  @media screen and (${device.mobile}) {
+    height: 100%;
+    width: 100%;
+  }
+`;
