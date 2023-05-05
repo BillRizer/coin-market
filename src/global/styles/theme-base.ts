@@ -1,7 +1,10 @@
+import { convertPxToRem } from "../utils/parse";
+
 export const theme = {
   name: "theme",
   colors: {
     primary: {
+      w100: "#FFF6E8",
       base: "#FBAB34",
       w400: "#FFB94F",
     },
@@ -28,13 +31,13 @@ export const theme = {
     textBase: "#5D6670",
   },
   fonts: {
-    h1: { size: "48px", LineHeight: "56px", LetterSpacing: "-1" },
-    h2: { size: "40px", LineHeight: "48px", LetterSpacing: "-1" },
-    h3: { size: "32px", LineHeight: "40px", LetterSpacing: "0" },
-    h4: { size: "24px", LineHeight: "32px", LetterSpacing: "0" },
-    h5: { size: "20px", LineHeight: "24px", LetterSpacing: "0" },
-    p: { size: "16px", LineHeight: "24px", LetterSpacing: "0" },
-    label: { size: "14px", LineHeight: "16px", LetterSpacing: "0" },
-    smallLabel: { size: "12px", LineHeight: "14px", LetterSpacing: "0" },
+    h1: { size: convertPxToRem(48), LineHeight: convertPxToRem(56), LetterSpacing: "-1" },
+    h2: { size: convertPxToRem(40), LineHeight: convertPxToRem(48), LetterSpacing: "-1" },
+    h3: { size: convertPxToRem(32), LineHeight: convertPxToRem(40), LetterSpacing: "0" },
+    h4: { size: convertPxToRem(24), LineHeight: convertPxToRem(32), LetterSpacing: "0" },
+    h5: { size: convertPxToRem(20), LineHeight: convertPxToRem(24), LetterSpacing: "0" },
+    p: { size: convertPxToRem(16), LineHeight: convertPxToRem(24), LetterSpacing: "0" },
+    label: { size: convertPxToRem(14), LineHeight: convertPxToRem(16), LetterSpacing: "0" },
+    smallLabel: { size: convertPxToRem(12), LineHeight: convertPxToRem(14), LetterSpacing: "0" },
   },
 };
