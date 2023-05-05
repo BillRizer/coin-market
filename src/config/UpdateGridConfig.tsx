@@ -7,15 +7,17 @@ import {
 export const UpdateGridConfig = () => {
   const screenClass = useScreenClass();
   let config: Configuration = {
-    containerWidths: [272, 672, 1216],
-    breakpoints: [302, 702, 1246],
+    // containerWidths: [600, 800, 1216],
+    containerWidths: [540, 740, 1140],
+    // breakpoints: [302, 702, 1246],
+    breakpoints: [540, 740, 960, 1140, 1540, 1810],
     defaultScreenClass: "lg",
     maxScreenClass: "lg",
     gutterWidth: 32,
     gridColumns: 12,
   };
 
-  if (screenClass == "sm") {
+  if (screenClass == "sm" || screenClass == "xs") {
     config.gutterWidth = 16;
     config.gridColumns = 4;
   }
