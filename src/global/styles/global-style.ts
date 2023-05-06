@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import { theme } from "./theme-base";
 import { device } from "../utils/device";
-import { mediaQ } from "../utils/media-query";
+import { mediaQ } from "../utils/_media-query";
 
 const GlobalStyle = createGlobalStyle`
 html{

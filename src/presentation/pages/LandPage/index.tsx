@@ -7,7 +7,7 @@ import IconMinimalistComputer from "../../../assets/icons/icon-m-computer.svg";
 import IconMinimalistChart from "../../../assets/icons/icon-m-chart.svg";
 import { useModal } from "../../../application/hook/modal";
 import { BannerCarrouselComponent } from "../../shared/components/BannerCarrousel";
-import { TileComponent } from "../../shared/components/Tile";
+import { TileComponent } from "../../shared/components/Tiles/Tile";
 import * as S from "./style";
 import { Col, Row, Container, useScreenClass } from "react-grid-system";
 import { JumbotronComponent } from "../../shared/components/Jumbotron";
@@ -20,8 +20,7 @@ export const LandPage = () => {
 
   const images = [
     "https://placeimg.com/640/480/nature",
-    "https://placeimg.com/640/480/arch",
-    "https://placeimg.com/640/480/animals",
+   
   ];
   const screenClass = useScreenClass();
 
@@ -101,7 +100,7 @@ export const LandPage = () => {
               {tileList()}
             </S.GroupTiles>
           </Col>
-          <Col lg={4} style={{ alignItems: "center", display: "flex" }}>
+          <Col xs={12} lg={4} style={{ alignItems: "center", display: "flex" }}>
             <JumbotronComponent
               legend="Lorem ipsum "
               title="Lorem ipsum "
