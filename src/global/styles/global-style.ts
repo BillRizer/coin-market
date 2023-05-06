@@ -44,18 +44,7 @@ p,a{
     letter-spacing: ${(p) => `${p.theme.fonts.p.LetterSpacing}`};
     text-decoration:none
 }
-.w400{
-    font-weight:400;
-}
-.w500{
-    font-weight:500;
-}
-.w600{
-    font-weight:600;
-}
-.w700{
-    font-weight:700;
-}
+
 .text-label{
     font-size: ${(p) => `${p.theme.fonts.label.size}`};
     line-height: ${(p) => `${p.theme.fonts.label.LineHeight}`};
@@ -86,6 +75,18 @@ h4{
 }
 h5{
     font-size: ${(p) => `${p.theme.fonts.h5.size}`};
+}
+.w400{
+    font-weight:400;
+}
+.w500{
+    font-weight:500;
+}
+.w600{
+    font-weight:600;
+}
+.w700{
+    font-weight:700;
 }
 .color-primary{
     color:${(p) => `${p.theme.colors.primary.base}`};
@@ -133,6 +134,11 @@ h5{
 }
 .no-padding{
     padding:0;
+}
+.generic-box-shadow{
+    background: #fff;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 `;
 

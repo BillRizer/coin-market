@@ -8,9 +8,9 @@ export const UpdateGridConfig = () => {
   const screenClass = useScreenClass();
   let config: Configuration = {
     // containerWidths: [600, 800, 1216],
-    containerWidths: [540, 740, 1140],
+    containerWidths: [540, 740, 1216+32],
     // breakpoints: [302, 702, 1246],
-    breakpoints: [540, 740, 960, 1140, 1540, 1810],
+    breakpoints: [540, 740, 960, 1216, 1540, 1810],
     defaultScreenClass: "lg",
     maxScreenClass: "lg",
     gutterWidth: 32,
