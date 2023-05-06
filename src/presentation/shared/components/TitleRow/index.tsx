@@ -1,8 +1,4 @@
-import React, {
-  ReactComponentElement,
-  ReactElement,
-  ReactPropTypes,
-} from "react";
+import React, { ReactElement } from "react";
 import * as S from "./style";
 import { IconComponent } from "../Icon";
 
