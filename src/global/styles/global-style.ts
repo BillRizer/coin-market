@@ -1,7 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { theme } from "./theme-base";
 import { device } from "../utils/device";
-import { mediaQ } from "../utils/_media-query";
 
 const GlobalStyle = createGlobalStyle`
 html{
@@ -9,7 +7,6 @@ html{
     padding: 0 ;
     box-sizing: border-box;
     font-size:62.5%
-    
 }
 
 @media screen and (${device.tablet}) {

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { mediaQ } from "../../../../global/utils/_media-query";
 
 export const Container = styled.div`
   display: flex;
@@ -15,9 +14,7 @@ export const Menu = styled.div`
   height: 100vh;
   display: none;
 
-  /* @media screen and (${mediaQ("tablet","laptop")}) {
-    display: block;
-  } */
+
 `;
 export const Item = styled.div`
   padding: 12px;

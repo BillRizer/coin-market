@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { device } from "../../../../../global/utils/device";
-import { mediaQ } from "../../../../../global/utils/_media-query";
 import { convertPxToRem } from "../../../../../global/utils/parse";
 
 export const Container = styled.div`
