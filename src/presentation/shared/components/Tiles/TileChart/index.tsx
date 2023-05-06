@@ -1,8 +1,7 @@
-import React, { Component, HTMLAttributes, ReactElement } from "react";
+import React, { HTMLAttributes } from "react";
 import * as S from "./style";
 import { GenericBorderStyle } from "../../../components-styled/GenericBorder";
-import { Hidden } from "react-grid-system";
-import { NumberComponent } from "../../NumberCotation";
+import { NumberCotationComponent } from "../../NumberCotation";
 import { IconComponent } from "../../Icon";
 interface Props extends HTMLAttributes<HTMLDivElement> {
   icon: any;
@@ -33,7 +32,7 @@ export const TileChartComponent = ({
             <span className="text-label">ETH</span>
           </S.LineCrypto>
           <S.Amount className="text-label">
-            <NumberComponent showSignal={true} num={4.12} sufix="%" />
+            <NumberCotationComponent showSignal={true} num={4.12} sufix="%" />
           </S.Amount>
         </S.Left>
         <S.Right>Chart HEre</S.Right>

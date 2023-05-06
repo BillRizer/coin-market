@@ -5,12 +5,15 @@ import { convertPxToRem } from "../../../../../global/utils/parse";
 
 export const Container = styled.div`
   height: 112px;
+  display: flex;
   /* background: #ffffff;
   display: flex;
   
 */
   @media screen and (${device.mobile}) {
-    max-height: 128px;
+   
+    height: 142px;
+        flex-direction: column;
   }
   .crypticon {
     margin-right: 8px;
@@ -61,6 +64,7 @@ export const Amount = styled.div`
 export const Right = styled.div<{ backgroundColor?: string }>`
   background-color: ${(p) =>
     p.backgroundColor ? p.backgroundColor : p.theme.colors.primary.w100};
+    width: 100%;
   @media screen and (${device.mobile}) {
     height: 100%;
     width: 100%;
