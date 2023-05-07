@@ -3,6 +3,7 @@ import * as S from "./style";
 import { GenericBorderStyle } from "../../../components-styled/GenericBorder";
 import { NumberCotationComponent } from "../../NumberCotation";
 import { IconComponent } from "../../Icon";
+import { ChartComponent } from "./chart";
 interface Props extends HTMLAttributes<HTMLDivElement> {
   icon: any;
   color?: string;
@@ -18,6 +19,8 @@ export const TileChartComponent = ({
   data,
   ...rest
 }: Props) => {
+  
+
   return (
     <GenericBorderStyle>
       <S.Container>
@@ -35,7 +38,7 @@ export const TileChartComponent = ({
             <NumberCotationComponent showSignal={true} num={4.12} sufix="%" />
           </S.Amount>
         </S.Left>
-        <S.Right>Chart HEre</S.Right>
+        <S.Right><ChartComponent data={data}/></S.Right>
       </S.Container>
     </GenericBorderStyle>
   );

@@ -1,4 +1,4 @@
-import React, { ReactPropTypes, useState } from "react";
+import React, { ReactPropTypes, useEffect, useState } from "react";
 import * as S from "./style";
 import IconBrand from "../../../../assets/icons/brand.svg";
 import IconHamburguer from "../../../../assets/icons/icon-hamb.svg";
@@ -14,6 +14,7 @@ import {
   useScreenClass,
 } from "react-grid-system";
 import { AvatarComponent } from "./Avatar";
+import { useAuth } from "../../../../application/hook/useAuth";
 
 interface Props {
   isLogged: boolean;
@@ -21,6 +22,13 @@ interface Props {
 
 export const NavComponent = ({ isLogged }: Props) => {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
+  const { user } = useAuth();
+  const [cacheUser, setCacheUser] = useState<any>();
+
+  useEffect(() => {
+    setCacheUser(user);
+  }, [user]);
+
   const screenClass = useScreenClass();
   const HamburguerComponent = () => {
     let styleInvertIcon = {};
@@ -62,8 +70,8 @@ export const NavComponent = ({ isLogged }: Props) => {
                 <S.Item>
                   <AvatarComponent
                     isCompact={screenClass === "sm"}
-                    image="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg"
-                    name="Abdul zil ali os outros"
+                    image={cacheUser?.avatar || ""}
+                    name={cacheUser?.name || ""}
                     options={[
                       {
                         label: "logoff",

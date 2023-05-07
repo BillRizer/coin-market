@@ -9,9 +9,8 @@ export const Container = styled.div`
   
 */
   @media screen and (${device.mobile}) {
-   
     height: 142px;
-        flex-direction: column;
+    flex-direction: column;
   }
   .crypticon {
     margin-right: 8px;
@@ -60,9 +59,14 @@ export const Amount = styled.div`
 `;
 
 export const Right = styled.div<{ backgroundColor?: string }>`
-  background-color: ${(p) =>
-    p.backgroundColor ? p.backgroundColor : p.theme.colors.primary.w100};
-    width: 100%;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  & > div {
+    position: absolute!important;
+    right: -5px;
+    top: 0;
+  }
   @media screen and (${device.mobile}) {
     height: 100%;
     width: 100%;
