@@ -30,7 +30,7 @@ export const TileAComponent = ({
           </span>
         </S.Left>
         <S.Right>
-          <h3 className="w700">R$ 12,837.13</h3>
+          <h3 className="w700">{rightText}</h3>
         </S.Right>
       </S.Container>
     </GenericBorderStyle>

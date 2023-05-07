@@ -22,6 +22,7 @@ export const Text = styled.div`
   height: 1.2em;
   white-space: nowrap;
   cursor: pointer;
+  margin-right: 10px;
 `;
 export const Icon = styled.img`
   &.open {

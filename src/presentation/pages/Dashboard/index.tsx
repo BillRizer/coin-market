@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import IconMinimalistWallet from "../../../assets/icons/icon-m-wallet.svg";
 import IconMinimalistScale from "../../../assets/icons/icon-m-scale.svg";
@@ -25,10 +25,29 @@ import { GridComponent } from "../../shared/components/Grid";
 import { NumberCotationComponent } from "../../shared/components/NumberCotation";
 import { convertToCurrencyFormat } from "../../../global/utils/convert-to-currency";
 import { NotFoundComponent } from "../../shared/components/NotFound";
+import { getCryptosFromApi } from "../../../application/services/crypto";
+import { ICrypto, ICryptos } from "../../../application/types/crypto";
+import {
+  ICrytoAbbrev,
+  getCryptoIconUsingAbrev,
+} from "../../../application/constants/crypto";
+import { IWallet } from "../../../application/types/wallet";
 
 export const DashboardPage = () => {
   const { user, signOut, signIn } = useAuth();
-
+  const [crypto, setCrypto] = useState<ICryptos>();
+  const [wallet, setWallet] = useState<IWallet>({});
+  useEffect(() => {
+    if (user) {
+      setWallet(user.wallet);
+    }
+    getCryptosFromApi().then((data) => {
+      if (data) {
+        setCrypto(data);
+      }
+    });
+  }, []);
+  console.log(user);
   let table = [
     {
       id: 1,
@@ -87,42 +106,6 @@ export const DashboardPage = () => {
       pv: 2400,
       amt: 6400,
     },
-    {
-      name: "Page B",
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: "Page C",
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: "Page D",
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: "Page E",
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: "Page F",
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: "Page G",
-      uv: 1490,
-      pv: 1300,
-      amt: 1100,
-    },
   ];
 
   const handleSignIn = () => {
@@ -130,26 +113,38 @@ export const DashboardPage = () => {
     console.log(user);
   };
 
+  const calcHolding = (cotation: number, amount: number): number => {
+    return cotation * amount;
+  };
+  const calcHoldingText = (cotation: number, amount: number): string => {
+    return convertToCurrencyFormat(
+      calcHolding(cotation, amount),
+      "USD",
+      "en-US"
+    );
+  };
+  const cotationText = (cotation: number, index: ICrytoAbbrev): string => {
+    return `${cotation} ${index.toUpperCase()}`;
+  };
   return (
     <div>
       <Container>
         <Row>
-         
           <Col lg={6} md={12} sm={4}>
             <TileAComponent
               color="red"
               icon={IconMinimalistScale}
               leftText="Balance in US$"
-              rightText=" R$ 12,837.13"
+              rightText={convertToCurrencyFormat(63837.12, "BRL", "pt-BR")}
             ></TileAComponent>
           </Col>
           <Col lg={3} md={4} sm={2} xs={2}>
             <TileChartComponent
-              icon={IconEthereum}
-              data={dataChart}
-              title=""
-              crypto=""
-              cryptoValue={0}
+              icon={getCryptoIconUsingAbrev("eth")}
+              chartData={crypto ? crypto["eth"].historygram : []}
+              title="Daily Variation"
+              cryptoAbbreviation="ETH"
+              cryptoValue={crypto ? crypto["eth"].change : 0}
             />
           </Col>
           <Col lg={3} md={4} sm={2} xs={2}>
@@ -174,7 +169,7 @@ export const DashboardPage = () => {
                   isResponsive
                 ></ButtonComponent>
               </TitleRowComponent>
-              <S.Content >
+              <S.Content>
                 <GridComponent
                   header={[
                     { label: "#", size: "0.2fr" },
@@ -183,26 +178,33 @@ export const DashboardPage = () => {
                     { label: "Change", size: "1fr" },
                     { label: "Trade", size: "0.2fr" },
                   ]}
-                  isEmpty={table?.length === 0}
                 >
-                  {table?.length > 0 ? (
-                    table.map((row, k) => (
+                  {wallet && crypto ? (
+                    Object.keys(wallet).map((index, k) => (
                       <div key={k}>
                         <div className="text-label">0{k + 1}</div>
                         <S.ItemCrypto>
                           <IconComponent
-                            Icon={row.crypto.icon}
+                            Icon={getCryptoIconUsingAbrev(
+                              index as ICrytoAbbrev
+                            )}
                             size="large"
                           ></IconComponent>{" "}
-                          <div className="text-label">{row.crypto.label}</div>
+                          <div className="text-label">
+                            {crypto[index].label}
+                          </div>
                         </S.ItemCrypto>
                         <S.ItemHolding>
-                          <div className="text-label">{row.holding.total}</div>
+                          <div className="text-label">
+                            {calcHoldingText(
+                              crypto[index].unit,
+                              wallet[index].amount
+                            )}
+                          </div>
                           <div className="text-small-label">
-                            {convertToCurrencyFormat(
-                              row.holding.total,
-                              "USD",
-                              "en-US"
+                            {cotationText(
+                              wallet[index].amount,
+                              index as ICrytoAbbrev
                             )}
                           </div>
                         </S.ItemHolding>
@@ -210,7 +212,7 @@ export const DashboardPage = () => {
                           <NumberCotationComponent
                             className="text-label"
                             showSignal
-                            num={row.change}
+                            num={crypto[index].change}
                             sufix="%"
                           />
                         </S.ItemChange>

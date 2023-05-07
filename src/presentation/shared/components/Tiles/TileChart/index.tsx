@@ -7,38 +7,40 @@ import { ChartComponent } from "./chart";
 interface Props extends HTMLAttributes<HTMLDivElement> {
   icon: any;
   color?: string;
-  crypto: string;
+  cryptoAbbreviation: string;
+  title: string;
   cryptoValue: number;
-  data: Array<any>;
+  chartData: Array<any>;
 }
 export const TileChartComponent = ({
   icon,
   color,
-  crypto,
+  cryptoAbbreviation,
+  title,
   cryptoValue,
-  data,
+  chartData,
   ...rest
 }: Props) => {
-  
-
   return (
     <GenericBorderStyle>
       <S.Container>
         <S.Left className="no-margin-all">
-          <S.Title className="text-small-label">Daily Variation</S.Title>
+          <S.Title className="text-small-label">{title}</S.Title>
           <S.LineCrypto>
             <IconComponent
               className="crypticon"
               Icon={icon}
               size="big"
             ></IconComponent>
-            <span className="text-label">ETH</span>
+            <span className="text-label">{cryptoAbbreviation}</span>
           </S.LineCrypto>
           <S.Amount className="text-label">
-            <NumberCotationComponent showSignal={true} num={4.12} sufix="%" />
+            <NumberCotationComponent showSignal={true} num={cryptoValue} sufix="%" />
           </S.Amount>
         </S.Left>
-        <S.Right><ChartComponent data={data}/></S.Right>
+        <S.Right>
+          <ChartComponent data={chartData} />
+        </S.Right>
       </S.Container>
     </GenericBorderStyle>
   );

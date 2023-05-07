@@ -1,15 +1,23 @@
-import React, { Component, HTMLAttributes, ReactElement } from "react";
+import React, {
+  Component,
+  HTMLAttributes,
+  ReactElement,
+  useState,
+} from "react";
 import IconMinimalistWallet from "../../../../assets/icons/icon-m-wallet.svg";
 import IconMinimalistBitcoin from "../../../../assets/icons/icon-m-bitcoin.svg";
 import IconMinimalistCircle from "../../../../assets/icons/icon-m-circle.svg";
 import IconMinimalistChart from "../../../../assets/icons/icon-m-chart.svg";
+import IconArrowCircle from "../../../../assets/icons/icon-arrow-circle.svg";
 
 import * as S from "./style";
 import { IconComponent } from "../Icon";
+
 interface Props {
   children: ReactElement;
 }
 export const SidebarComponent = ({ children, ...rest }: Props) => {
+  const [isOpen, setIsOpen] = useState(false);
   const elements = [
     {
       icon: IconMinimalistWallet,
@@ -33,15 +41,22 @@ export const SidebarComponent = ({ children, ...rest }: Props) => {
     },
   ];
   return (
-    <S.Container >
-      <S.Menu>
+    <S.Container>
+      <S.Menu isOpen={isOpen}>
         {elements.map((e, k) => (
-          <S.Item key={k}>
+          <S.Item key={k} className="no-margin-all">
             <IconComponent Icon={e.icon} size="large"></IconComponent>
-            {/* <div className="text">{e.title}</div> */}
+            {isOpen && <div className="text-label">{e.title}</div>}
           </S.Item>
-          
         ))}
+        <S.Item>
+          <S.ToogleIcon
+            isOpen={isOpen}
+            onClick={() => setIsOpen(!isOpen)}
+            src={IconArrowCircle}
+            alt="arrow expand menu"
+          />
+        </S.Item>
       </S.Menu>
       <div className="content">{children}</div>
     </S.Container>
