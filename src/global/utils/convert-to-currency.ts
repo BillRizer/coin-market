@@ -13,8 +13,8 @@ export function convertToCurrencyFormat(
   const prefix = currency == "USD" ? "US" : "";
   const formated = formatter
     .format(value)
-    .replace(/^([\d,.]+)/, "$1 ")
-    .replace(/([\d,.]+)$/, " $1");
+    .replace(/([\d,.]+)$/, " $1")
+    .replace(/\s{2}/, " ");
 
   return `${prefix}${formated}`;
 }

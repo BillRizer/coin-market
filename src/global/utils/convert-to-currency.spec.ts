@@ -16,4 +16,9 @@ describe("convertToCurrencyFormat", () => {
     expect(convertToCurrencyFormat(2000.25, "JPY")).toBe("¥ 2,000");
   });
 
+  it("should convert float to real format", () => {
+    expect(convertToCurrencyFormat(1000, "BRL",'pt-BR')).toBe("R$ 1.000,00");
+    expect(convertToCurrencyFormat(2000.25, "BRL",'pt-BR')).toBe("R$ 2.000,25");
+  });
+
 });
