@@ -6,9 +6,9 @@ import { useAuth } from "../hook/useAuth";
 import { LayoutContainer } from "../../presentation/shared/layount/Layout";
 
 export const RoutesComponent = () => {
-  const {getUser } = useAuth();
+  const {getUserFromLocalStorage } = useAuth();
   const ProtectedRoute = ({ children }: any) => {
-    if (getUser() == null) {
+    if (getUserFromLocalStorage() == null) {
       return <Navigate to="/" />;
     }
     return children;

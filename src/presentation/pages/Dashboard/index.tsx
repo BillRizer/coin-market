@@ -16,12 +16,10 @@ import * as S from "./style";
 import { Col, Row, Container } from "react-grid-system";
 import { TitleRowComponent } from "../../shared/components/TitleRow";
 import { ButtonComponent } from "../../shared/components/Button";
-import { GenericBorderStyle } from "../../shared/components-styled/GenericBorder";
 import { useAuth } from "../../../application/hook/useAuth";
 import { TileAComponent } from "../../shared/components/Tiles/TileA";
 import { TileChartComponent } from "../../shared/components/Tiles/TileChart";
 import { TileNewsComponent } from "../../shared/components/Tiles/TileNews";
-import { TableStyled } from "../../shared/components-styled/Table";
 import { IconComponent } from "../../shared/components/Icon";
 import { GridComponent } from "../../shared/components/Grid";
 import { NumberCotationComponent } from "../../shared/components/NumberCotation";
@@ -82,23 +80,50 @@ export const DashboardPage = () => {
     },
   ];
   table = [];
-
-  const Tile = () => {
-    return (
-      <Col lg={6} md={12} sm={4}>
-        <GenericBorderStyle>
-          <Row style={{ height: "112px" }}>
-            <Col lg={6} sm={2}>
-              Balance in US$
-            </Col>
-            <Col lg={6} sm={2}>
-              R$ 12,837.13
-            </Col>
-          </Row>
-        </GenericBorderStyle>
-      </Col>
-    );
-  };
+  const dataChart = [
+    {
+      name: "Page A",
+      uv: 2000,
+      pv: 2400,
+      amt: 6400,
+    },
+    {
+      name: "Page B",
+      uv: 3000,
+      pv: 1398,
+      amt: 2210,
+    },
+    {
+      name: "Page C",
+      uv: 2000,
+      pv: 9800,
+      amt: 2290,
+    },
+    {
+      name: "Page D",
+      uv: 2780,
+      pv: 3908,
+      amt: 2000,
+    },
+    {
+      name: "Page E",
+      uv: 1890,
+      pv: 4800,
+      amt: 2181,
+    },
+    {
+      name: "Page F",
+      uv: 2390,
+      pv: 3800,
+      amt: 2500,
+    },
+    {
+      name: "Page G",
+      uv: 1490,
+      pv: 1300,
+      amt: 1100,
+    },
+  ];
 
   const handleSignIn = () => {
     signIn({ email: "AYUsdhas@asudhas.com", password: "asd" });
@@ -109,8 +134,7 @@ export const DashboardPage = () => {
     <div>
       <Container>
         <Row>
-          {/* <Tile></Tile>
-           */}
+         
           <Col lg={6} md={12} sm={4}>
             <TileAComponent
               color="red"
@@ -122,7 +146,7 @@ export const DashboardPage = () => {
           <Col lg={3} md={4} sm={2} xs={2}>
             <TileChartComponent
               icon={IconEthereum}
-              data={[{}]}
+              data={dataChart}
               title=""
               crypto=""
               cryptoValue={0}
