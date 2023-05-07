@@ -1,0 +1,20 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/v1/my-wallet"
+  },
+  "response": {
+    "body": {
+      "message": "",
+      "isSuccess": true,
+      "errors": [],
+      "data": {
+        "btc": { "amount": 1 },
+        "eth": { "amount": 2 },
+        "ada": { "amount": 2 },
+        "sol": { "amount": 1 },
+        "usdc": { "amount": 2 }
+      }
+    }
+  }
+}
