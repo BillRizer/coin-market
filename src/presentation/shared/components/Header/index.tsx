@@ -2,6 +2,7 @@ import React, { ReactPropTypes, useEffect, useState } from "react";
 import * as S from "./style";
 import IconBrand from "../../../../assets/icons/brand.svg";
 import IconHamburguer from "../../../../assets/icons/icon-hamb.svg";
+import IconLogOff from "../../../../assets/icons/icon-logoff.svg";
 import { Link } from "react-router-dom";
 import { ButtonComponent } from "../Button";
 import { MarqueeCotationCryptComponent } from "../MarqueeCotationCrypt";
@@ -74,6 +75,7 @@ export const NavComponent = ({ isLogged }: Props) => {
                     name={cacheUser?.name || ""}
                     options={[
                       {
+                        icon: IconLogOff,
                         label: "logoff",
                         callback: () => {
                           alert("oi");
