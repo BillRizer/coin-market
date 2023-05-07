@@ -1,7 +1,11 @@
 import { IUser } from "../../../../application/types/user";
-import * as UserDto from "../dtos/user.dto";
+import { IUserDto } from "../dtos/user.dto";
+import { IWalletDto } from "../dtos/wallet.dto";
 
-export const MapperFromApiUser = (userFromApi: UserDto.IUser): IUser => {
+export const MapperFromApiUser = (
+  userFromApi: IUserDto,
+  wallet: IWalletDto
+): IUser => {
   const { avatar, email, name, password } = userFromApi;
 
   const data: IUser = {
@@ -9,6 +13,7 @@ export const MapperFromApiUser = (userFromApi: UserDto.IUser): IUser => {
     email,
     name,
     password,
+    wallet,
   };
   return data;
 };

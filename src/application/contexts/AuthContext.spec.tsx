@@ -8,6 +8,7 @@ const mockUser: IUser = {
   avatar: "http://aaa",
   email: "john@example.com",
   password: "password",
+  wallet: { abc: { amount: 10 } },
 };
 describe("AuthContext", () => {
   it("should initialize auth state with undefined user", () => {

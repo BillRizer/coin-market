@@ -1,4 +1,4 @@
-export interface IUser {
+export interface IUserDto {
   id: number;
   name: string;
   avatar: string;

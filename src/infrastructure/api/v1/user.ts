@@ -1,9 +1,12 @@
 import { api } from "./config/api";
-import { IUser } from "./dtos/user.dto";
+import { IUser } from "../../../application/types/user";
+import { MapperFromApiUser } from "./mappers/user";
 
 export const getUserFromApi = async (): Promise<IUser | null> => {
   try {
-    return (await api.get("user")).data.data;
+    const userfromApi = (await api.get("user")).data.data;
+    const walletfromApi = (await api.get("my-wallet")).data.data;
+    return MapperFromApiUser(userfromApi, walletfromApi);
   } catch (error) {
     console.log(error);
     return null;
