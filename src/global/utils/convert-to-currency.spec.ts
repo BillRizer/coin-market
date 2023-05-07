@@ -17,7 +17,7 @@ describe("convertToCurrencyFormat", () => {
   });
 
   it("should convert float to real format", () => {
-    expect(convertToCurrencyFormat(50.25, "BRL")).toBe("R$50,25");
+    expect(convertToCurrencyFormat(50.25, "BRL", "pt-BR")).toBe("R$50,25");
     expect(convertToCurrencyFormat(3500.99, "BRL")).toBe("R$3.500,99");
   });
 });
