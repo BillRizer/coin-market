@@ -26,49 +26,49 @@ export const Table = ({}) => {
         <tr>
           <td className="mini">01</td>
           <td className="inline icon">
-            <IconComponent Icon={iconBitcoin} size="large"></IconComponent>{" "}
+            <IconComponent Icon={iconBitcoin} size="32px"></IconComponent>{" "}
             Bitcoin
           </td>
           <td>eth</td>
           <td>01</td>
           <td className="mini">
-            <IconComponent Icon={iconTrade} size="medium"></IconComponent>
+            <IconComponent Icon={iconTrade} size="24px"></IconComponent>
           </td>
         </tr>
         <tr>
           <td className="mini">01</td>
           <td className="inline icon">
-            <IconComponent Icon={iconEthereum} size="large"></IconComponent>{" "}
+            <IconComponent Icon={iconEthereum} size="32px"></IconComponent>{" "}
             Ethereum ETH
           </td>
           <td>eth</td>
           <td>01</td>
           <td className="mini">
-            <IconComponent Icon={iconTrade} size="medium"></IconComponent>
+            <IconComponent Icon={iconTrade} size="24px"></IconComponent>
           </td>
         </tr>
         <tr>
           <td className="mini">01</td>
           <td className="inline icon">
-            <IconComponent Icon={iconCardano} size="large"></IconComponent>{" "}
+            <IconComponent Icon={iconCardano} size="32px"></IconComponent>{" "}
             Cardano ADA
           </td>
           <td>eth</td>
           <td>01</td>
           <td className="mini">
-            <IconComponent Icon={iconTrade} size="medium"></IconComponent>
+            <IconComponent Icon={iconTrade} size="24px"></IconComponent>
           </td>
         </tr>
         <tr>
           <td className="mini">01</td>
           <td className="inline icon">
-            <IconComponent Icon={iconSolana} size="large"></IconComponent>{" "}
+            <IconComponent Icon={iconSolana} size="32px"></IconComponent>{" "}
             Solana SOL
           </td>
           <td>eth</td>
           <td>01</td>
           <td className="mini">
-            <IconComponent Icon={iconTrade} size="medium"></IconComponent>
+            <IconComponent Icon={iconTrade} size="24px"></IconComponent>
           </td>
         </tr>
       </tbody>

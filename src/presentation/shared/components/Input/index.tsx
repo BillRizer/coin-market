@@ -28,7 +28,7 @@ export const InputComponent = ({
       {/* <Styled.Label htmlFor={id}>{label}</Styled.Label> */}
       {Icon && (
         <div className="icon">
-          <IconComponent Icon={Icon} size="small" />
+          <IconComponent Icon={Icon} size="16px" />
         </div>
       )}
       <Styled.InputElement

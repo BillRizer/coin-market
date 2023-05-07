@@ -1,6 +1,4 @@
 import React, {
-  Component,
-  HTMLAttributes,
   ReactElement,
   useState,
 } from "react";
@@ -45,7 +43,7 @@ export const SidebarComponent = ({ children, ...rest }: Props) => {
       <S.Menu isOpen={isOpen}>
         {elements.map((e, k) => (
           <S.Item key={k} className="no-margin-all">
-            <IconComponent Icon={e.icon} size="large"></IconComponent>
+            <IconComponent Icon={e.icon} size="32px"></IconComponent>
             {isOpen && <div className="text-label">{e.title}</div>}
           </S.Item>
         ))}

@@ -13,7 +13,7 @@ import iconCardano from "../../../assets/icons/icon-cardano.svg";
 import iconSolana from "../../../assets/icons/icon-solana.svg";
 
 import * as S from "./style";
-import { Col, Row, Container } from "react-grid-system";
+import { Col, Row, Container, useScreenClass } from "react-grid-system";
 import { TitleRowComponent } from "../../shared/components/TitleRow";
 import { ButtonComponent } from "../../shared/components/Button";
 import { useAuth } from "../../../application/hook/useAuth";
@@ -37,6 +37,7 @@ export const DashboardPage = () => {
   const { user, signOut, signIn } = useAuth();
   const [crypto, setCrypto] = useState<ICryptos>();
   const [wallet, setWallet] = useState<IWallet>({});
+  const currentScreen = useScreenClass();
   useEffect(() => {
     if (user) {
       setWallet(user.wallet);
@@ -171,6 +172,7 @@ export const DashboardPage = () => {
               </TitleRowComponent>
               <S.Content>
                 <GridComponent
+                  showHeader={currentScreen !== "xs" ? true : false}
                   header={[
                     { label: "#", size: "0.2fr" },
                     { label: "Crypto", size: "1fr" },
@@ -185,13 +187,15 @@ export const DashboardPage = () => {
                         <div className="text-label">0{k + 1}</div>
                         <S.ItemCrypto>
                           <IconComponent
+                            marginRight="16px"
                             Icon={getCryptoIconUsingAbrev(
                               index as ICrytoAbbrev
                             )}
-                            size="large"
+                            size="32px"
                           ></IconComponent>{" "}
                           <div className="text-label">
-                            {crypto[index].label}
+                            {crypto[index].label}{" "}
+                            {crypto[index].abbreviated.toUpperCase()}
                           </div>
                         </S.ItemCrypto>
                         <S.ItemHolding>
@@ -219,7 +223,7 @@ export const DashboardPage = () => {
                         <S.ItemHolding>
                           <IconComponent
                             Icon={iconTrade}
-                            size="medium"
+                            size="24px"
                           ></IconComponent>
                         </S.ItemHolding>
                       </div>

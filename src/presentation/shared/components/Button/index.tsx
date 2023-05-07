@@ -21,9 +21,15 @@ export const ButtonComponent = ({
   size = "medium",
   ...rest
 }: Props) => {
+  //TODO refactor this
+  const iconSize = (buttonsize: string) => {
+    if (buttonsize === "small") return "16px";
+    if (buttonsize === "medium") return "24px";
+    if (buttonsize === "large") return "32px";
+  };
   return (
     <Styled.Button onClick={onClick} color={color} size={size} {...rest}>
-      {Icon && <IconComponent Icon={Icon} size={size} />}
+      {Icon && <IconComponent Icon={Icon} size={iconSize(size)} />}
       {label ? label : children}
     </Styled.Button>
   );

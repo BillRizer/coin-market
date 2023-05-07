@@ -1,36 +1,36 @@
 import React, { HTMLAttributes } from "react";
-import * as Styled from "./style";
+import * as S from "./style";
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface Props extends HTMLAttributes<HTMLDivElement> {
   Icon: any;
-  size?: "small" | "medium" | "big" | "large";
-  width?: string;
-  height?: string;
+  size?: "12px" | "16px" | "24px" | "32px" | "40px";
   onClick?: any;
   cursorPointer?: boolean;
   disabled?: boolean;
+  marginRight?: string;
+  marginLeft?: string;
 }
 
 export const IconComponent = ({
   Icon,
   size,
-  width,
-  height,
   onClick,
   cursorPointer,
   disabled,
+  marginRight,
+  marginLeft,
   ...props
 }: Props) => {
   return (
-    <Styled.Icon
+    <S.Icon
       data-testid="icon"
       cursorPointer
       onClick={onClick}
       className={`${disabled ? "disabled" : ""} ${size}`}
-      style={{ width, height }}
+      style={{ width: size, height: size, marginRight, marginLeft }}
       {...props}
     >
       {typeof Icon === "string" ? <img src={Icon} alt="" /> : <Icon />}
-    </Styled.Icon>
+    </S.Icon>
   );
 };

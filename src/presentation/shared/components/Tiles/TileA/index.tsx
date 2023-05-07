@@ -1,4 +1,4 @@
-import React, { Component, HTMLAttributes, ReactElement } from "react";
+import React, {  HTMLAttributes} from "react";
 import * as S from "./style";
 import { GenericBorderStyle } from "../../../components-styled/GenericBorder";
 import { Hidden } from "react-grid-system";

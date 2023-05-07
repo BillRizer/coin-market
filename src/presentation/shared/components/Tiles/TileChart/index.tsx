@@ -30,7 +30,7 @@ export const TileChartComponent = ({
             <IconComponent
               className="crypticon"
               Icon={icon}
-              size="big"
+              size="24px"
             ></IconComponent>
             <span className="text-label">{cryptoAbbreviation}</span>
           </S.LineCrypto>
