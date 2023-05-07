@@ -7,10 +7,14 @@ interface IHeader {
 interface Props {
   header: Array<IHeader>;
   children: ReactNode;
+  isEmpty?: boolean;
 }
 
-export const GridComponent = ({ header, children }: Props) => {
+export const GridComponent = ({ isEmpty = false, header, children }: Props) => {
   const size: Array<string> = header.map(({ size }): string => size || "");
-
-  return <S.Container size={size}>{children}</S.Container>;
+  return (
+    <S.Container isEmpty={isEmpty} size={size}>
+      {children}
+    </S.Container>
+  );
 };
