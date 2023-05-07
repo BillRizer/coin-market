@@ -34,3 +34,15 @@ export const Container = styled.div<{ size?: Array<string>; isEmpty: boolean }>`
     }
   }
 `;
+export const Header = styled.div`
+  div {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+  }
+  @media screen and (${device.mobile}) {
+    div{
+      display: none;
+    }
+  }
+`;
