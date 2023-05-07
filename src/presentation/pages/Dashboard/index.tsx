@@ -5,6 +5,7 @@ import IconMinimalistScale from "../../../assets/icons/icon-m-scale.svg";
 import IconEthereum from "../../../assets/icons/icon-ethereum.svg";
 import IconPlus from "../../../assets/icons/icon-plus.svg";
 import ImageNews from "../../../assets/img/news.png";
+import IconNotFoundWallet from "../../../assets/icons/icon-notfound-wallet.svg";
 import iconBitcoin from "../../../assets/icons/icon-bitcoin.svg";
 import iconTrade from "../../../assets/icons/icon-trade.svg";
 import iconEthereum from "../../../assets/icons/icon-ethereum.svg";
@@ -24,11 +25,13 @@ import { TableStyled } from "../../shared/components-styled/Table";
 import { IconComponent } from "../../shared/components/Icon";
 import { GridComponent } from "../../shared/components/Grid";
 import { NumberCotationComponent } from "../../shared/components/NumberCotation";
+import { convertToCurrencyFormat } from "../../../global/utils/convert-to-currency";
+import { NotFoundComponent } from "../../shared/components/NotFound";
 
 export const DashboardPage = () => {
   const { user, signOut, signIn } = useAuth();
 
-  const table = [
+  let table = [
     {
       id: 1,
       crypto: {
@@ -41,7 +44,44 @@ export const DashboardPage = () => {
       },
       change: 1.99,
     },
+    {
+      id: 2,
+      crypto: {
+        icon: iconEthereum,
+        label: "Ethereum ETH",
+      },
+      holding: {
+        total: 188456,
+        cotation: "434 BTC",
+      },
+      change: -1.99,
+    },
+    {
+      id: 3,
+      crypto: {
+        icon: iconCardano,
+        label: "Cardano ADA",
+      },
+      holding: {
+        total: 23456,
+        cotation: "434 BTC",
+      },
+      change: 1.99,
+    },
+    {
+      id: 4,
+      crypto: {
+        icon: iconSolana,
+        label: "Solana SOL",
+      },
+      holding: {
+        total: 33331,
+        cotation: "434 BTC",
+      },
+      change: -11.619,
+    },
   ];
+  table = [];
 
   const Tile = () => {
     return (
@@ -110,7 +150,7 @@ export const DashboardPage = () => {
                   isResponsive
                 ></ButtonComponent>
               </TitleRowComponent>
-              <S.Content>
+              <S.Content >
                 <GridComponent
                   header={[
                     { label: "#", size: "0.2fr" },
@@ -119,8 +159,9 @@ export const DashboardPage = () => {
                     { label: "Change", size: "1fr" },
                     { label: "Trade", size: "0.2fr" },
                   ]}
+                  isEmpty={table?.length === 0}
                 >
-                  {table?.length > 0 &&
+                  {table?.length > 0 ? (
                     table.map((row, k) => (
                       <div key={k}>
                         <div className="text-label">0{k + 1}</div>
@@ -134,7 +175,11 @@ export const DashboardPage = () => {
                         <S.ItemHolding>
                           <div className="text-label">{row.holding.total}</div>
                           <div className="text-small-label">
-                            {row.holding.cotation}
+                            {convertToCurrencyFormat(
+                              row.holding.total,
+                              "USD",
+                              "en-US"
+                            )}
                           </div>
                         </S.ItemHolding>
                         <S.ItemChange>
@@ -152,94 +197,15 @@ export const DashboardPage = () => {
                           ></IconComponent>
                         </S.ItemHolding>
                       </div>
-                    ))}
+                    ))
+                  ) : (
+                    <NotFoundComponent
+                      image={IconNotFoundWallet}
+                      title="Nothing here yet..."
+                      subTitle="Add a crypto and start earning"
+                    />
+                  )}
                 </GridComponent>
-
-                <TableStyled>
-                  <thead>
-                    <tr>
-                      <td>#</td>
-                      <td>Crypto</td>
-                      <td>Holdings</td>
-                      <td>Change</td>
-                      <td className="mini">Trade</td>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="mini">01</td>
-                      <td className="inline icon">
-                        <IconComponent
-                          Icon={iconBitcoin}
-                          size="large"
-                        ></IconComponent>{" "}
-                        Bitcoin
-                      </td>
-                      <td>eth</td>
-                      <td>01</td>
-                      <td className="mini">
-                        <IconComponent
-                          Icon={iconTrade}
-                          size="medium"
-                        ></IconComponent>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="mini">01</td>
-                      <td className="inline icon">
-                        <IconComponent
-                          Icon={iconEthereum}
-                          size="large"
-                        ></IconComponent>{" "}
-                        Ethereum ETH
-                      </td>
-                      <td>eth</td>
-                      <td>01</td>
-                      <td className="mini">
-                        <IconComponent
-                          Icon={iconTrade}
-                          size="medium"
-                        ></IconComponent>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="mini">01</td>
-                      <td className="inline icon">
-                        <IconComponent
-                          Icon={iconCardano}
-                          size="large"
-                        ></IconComponent>{" "}
-                        Cardano ADA
-                      </td>
-                      <td>eth</td>
-                      <td>01</td>
-                      <td className="mini">
-                        <IconComponent
-                          Icon={iconTrade}
-                          size="medium"
-                        ></IconComponent>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="mini">01</td>
-                      <td className="inline icon">
-                        <IconComponent
-                          Icon={iconSolana}
-                          size="large"
-                        ></IconComponent>{" "}
-                        Solana SOL
-                      </td>
-                      <td>eth</td>
-                      <td>01</td>
-                      <td className="mini">
-                        <IconComponent
-                          Icon={iconTrade}
-                          size="medium"
-                        ></IconComponent>
-                      </td>
-                    </tr>
-                  </tbody>
-                </TableStyled>
               </S.Content>
             </S.MyWalletContainer>
           </Col>

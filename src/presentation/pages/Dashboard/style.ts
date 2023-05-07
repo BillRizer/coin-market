@@ -29,12 +29,14 @@ export const GroupTiles = styled.div`
 export const MyWalletContainer = styled.div`
   padding: 24px;
   @media screen and (${device.mobile}) {
-    box-shadow: none;
+    box-shadow: none!important;
+    background: transparent!important;
   }
 `;
 export const Content = styled.div`
-  min-height: 414px;
-
+  & > div:empty {
+    min-height: 414px;
+  }
   @media screen and (${device.mobile}) {
     min-height: 100px;
   }
@@ -50,7 +52,7 @@ export const ItemHolding = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  & > div{
+  & > div {
     margin: 0;
   }
   @media screen and (${device.mobile}) {
@@ -60,7 +62,6 @@ export const ItemChange = styled.div`
   margin: 0;
   display: flex;
   flex-direction: column;
-
 `;
 export const Actions = styled.div`
   margin: 0;
