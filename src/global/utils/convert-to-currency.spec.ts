@@ -17,8 +17,17 @@ describe("convertToCurrencyFormat", () => {
   });
 
   it("should convert float to real format", () => {
-    expect(convertToCurrencyFormat(1000, "BRL",'pt-BR')).toBe("R$ 1.000,00");
-    expect(convertToCurrencyFormat(2000.25, "BRL",'pt-BR')).toBe("R$ 2.000,25");
+    expect(convertToCurrencyFormat(1000, "BRL", "pt-BR")).toBe("R$ 1.000,00");
+    expect(convertToCurrencyFormat(2000.25, "BRL", "pt-BR")).toBe(
+      "R$ 2.000,25"
+    );
   });
-
+  it("should hide prefix when USD", () => {
+    expect(convertToCurrencyFormat(1000, "USD", "en-US", true)).toBe(
+      "$ 1,000.00"
+    );
+    expect(convertToCurrencyFormat(2000.25, "USD", "en-US", true)).toBe(
+      "$ 2,000.25"
+    );
+  });
 });

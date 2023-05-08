@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import IconMinimalistWallet from "../../../assets/icons/icon-m-wallet.svg";
 import IconMinimalistScale from "../../../assets/icons/icon-m-scale.svg";
@@ -13,7 +13,14 @@ import iconCardano from "../../../assets/icons/icon-cardano.svg";
 import iconSolana from "../../../assets/icons/icon-solana.svg";
 
 import * as S from "./style";
-import { Col, Row, Container, useScreenClass } from "react-grid-system";
+import {
+  Col,
+  Row,
+  Container,
+  useScreenClass,
+  Hidden,
+  Visible,
+} from "react-grid-system";
 import { TitleRowComponent } from "../../shared/components/TitleRow";
 import { ButtonComponent } from "../../shared/components/Button";
 import { useAuth } from "../../../application/hook/useAuth";
@@ -26,7 +33,7 @@ import { NumberCotationComponent } from "../../shared/components/NumberCotation"
 import { convertToCurrencyFormat } from "../../../global/utils/convert-to-currency";
 import { NotFoundComponent } from "../../shared/components/NotFound";
 import { getCryptosFromApi } from "../../../application/services/crypto";
-import { ICrypto, ICryptos } from "../../../application/types/crypto";
+import { ICryptos } from "../../../application/types/crypto";
 import {
   ICrytoAbbrev,
   getCryptoIconUsingAbrev,
@@ -36,82 +43,44 @@ import { IWallet } from "../../../application/types/wallet";
 export const DashboardPage = () => {
   const { user, signOut, signIn } = useAuth();
   const [crypto, setCrypto] = useState<ICryptos>();
-  const [wallet, setWallet] = useState<IWallet>({});
-  const currentScreen = useScreenClass();
-  useEffect(() => {
-    if (user) {
-      setWallet(user.wallet);
-    }
-    getCryptosFromApi().then((data) => {
-      if (data) {
-        setCrypto(data);
-      }
-    });
-  }, []);
-  console.log(user);
-  let table = [
-    {
-      id: 1,
-      crypto: {
-        icon: iconBitcoin,
-        label: "Bitcoin BTC",
-      },
-      holding: {
-        total: 123456,
-        cotation: "434 BTC",
-      },
-      change: 1.99,
-    },
-    {
-      id: 2,
-      crypto: {
-        icon: iconEthereum,
-        label: "Ethereum ETH",
-      },
-      holding: {
-        total: 188456,
-        cotation: "434 BTC",
-      },
-      change: -1.99,
-    },
-    {
-      id: 3,
-      crypto: {
-        icon: iconCardano,
-        label: "Cardano ADA",
-      },
-      holding: {
-        total: 23456,
-        cotation: "434 BTC",
-      },
-      change: 1.99,
-    },
-    {
-      id: 4,
-      crypto: {
-        icon: iconSolana,
-        label: "Solana SOL",
-      },
-      holding: {
-        total: 33331,
-        cotation: "434 BTC",
-      },
-      change: -11.619,
-    },
-  ];
-  table = [];
-  const dataChart = [
-    {
-      name: "Page A",
-      uv: 2000,
-      pv: 2400,
-      amt: 6400,
-    },
-  ];
+  const [wallet, setWallet] = useState<IWallet>();
+  const [balance, setBalance] = useState<number | null>(null);
 
+  const currentScreen = useScreenClass();
+  const isMobile = currentScreen == "xs";
+  const isTablet = currentScreen == "sm";
+  useEffect(() => {
+    if (wallet == null) {
+      if (user) {
+        setWallet(user.wallet);
+      }
+      getCryptosFromApi().then((data) => {
+        if (data) {
+          setCrypto(data);
+        }
+      });
+    }
+    if (wallet && crypto) {
+      calcTotalBalance(wallet, crypto);
+    }
+    // calcTotalBalance(wallet, crypto);
+  }, [wallet, crypto]);
+
+  const calcTotalBalance = useCallback(
+    (wallet: IWallet, crypto: ICryptos) => {
+      console.log(wallet);
+
+      let total = 0;
+      for (const index of Object.keys(wallet)) {
+        total += wallet[index].amount * crypto[index].unit;
+      }
+      setBalance(total);
+      console.log(total);
+    },
+    [wallet, crypto, setBalance]
+  );
   const handleSignIn = () => {
     signIn({ email: "AYUsdhas@asudhas.com", password: "asd" });
-    console.log(user);
   };
 
   const calcHolding = (cotation: number, amount: number): number => {
@@ -131,15 +100,20 @@ export const DashboardPage = () => {
     <div>
       <Container>
         <Row>
-          <Col lg={6} md={12} sm={4}>
+          <Col lg={6} md={12} sm={4} style={{ marginTop: "32px" }}>
             <TileAComponent
               color="red"
               icon={IconMinimalistScale}
               leftText="Balance in US$"
-              rightText={convertToCurrencyFormat(63837.12, "BRL", "pt-BR")}
+              rightText={convertToCurrencyFormat(
+                balance || 0,
+                "USD",
+                "en-US",
+                true
+              )}
             ></TileAComponent>
           </Col>
-          <Col lg={3} md={4} sm={2} xs={2}>
+          <Col lg={3} md={4} sm={2} xs={2} style={{ marginTop: "32px" }}>
             <TileChartComponent
               icon={getCryptoIconUsingAbrev("eth")}
               chartData={crypto ? crypto["eth"].historygram : []}
@@ -148,7 +122,7 @@ export const DashboardPage = () => {
               cryptoValue={crypto ? crypto["eth"].change : 0}
             />
           </Col>
-          <Col lg={3} md={4} sm={2} xs={2}>
+          <Col lg={3} md={4} sm={2} xs={2} style={{ marginTop: "32px" }}>
             <TileNewsComponent
               image={ImageNews}
               data={[{}]}
@@ -172,7 +146,7 @@ export const DashboardPage = () => {
               </TitleRowComponent>
               <S.Content>
                 <GridComponent
-                  showHeader={currentScreen !== "xs" ? true : false}
+                  showHeader={isMobile ? false : true}
                   header={[
                     { label: "#", size: "0.2fr" },
                     { label: "Crypto", size: "1fr" },
@@ -184,14 +158,16 @@ export const DashboardPage = () => {
                   {wallet && crypto ? (
                     Object.keys(wallet).map((index, k) => (
                       <div key={k}>
-                        <div className="text-label">0{k + 1}</div>
+                        <Hidden xs>
+                          <div className="text-label">0{k + 1}</div>
+                        </Hidden>
                         <S.ItemCrypto>
                           <IconComponent
-                            marginRight="16px"
+                            marginRight={isMobile ? "8px" : "16px"}
                             Icon={getCryptoIconUsingAbrev(
                               index as ICrytoAbbrev
                             )}
-                            size="32px"
+                            size={isMobile ? "16px" : "32px"}
                           ></IconComponent>{" "}
                           <div className="text-label">
                             {crypto[index].label}{" "}
@@ -199,12 +175,16 @@ export const DashboardPage = () => {
                           </div>
                         </S.ItemCrypto>
                         <S.ItemHolding>
-                          <div className="text-label">
+                          <Visible xs>
+                            <div className="text-label title">Holding</div>
+                          </Visible>
+                          <div className="text-label ">
                             {calcHoldingText(
                               crypto[index].unit,
                               wallet[index].amount
                             )}
                           </div>
+
                           <div className="text-small-label">
                             {cotationText(
                               wallet[index].amount,
@@ -212,7 +192,11 @@ export const DashboardPage = () => {
                             )}
                           </div>
                         </S.ItemHolding>
+
                         <S.ItemChange>
+                          <Visible xs>
+                            <div className="text-label">Change</div>
+                          </Visible>
                           <NumberCotationComponent
                             className="text-label"
                             showSignal
@@ -221,10 +205,14 @@ export const DashboardPage = () => {
                           />
                         </S.ItemChange>
                         <S.ItemHolding>
-                          <IconComponent
-                            Icon={iconTrade}
-                            size="24px"
-                          ></IconComponent>
+                          {isMobile ? (
+                            <ButtonComponent></ButtonComponent>
+                          ) : (
+                            <IconComponent
+                              Icon={iconTrade}
+                              size="24px"
+                            ></IconComponent>
+                          )}
                         </S.ItemHolding>
                       </div>
                     ))

@@ -10,7 +10,6 @@ export const getUser = async (): Promise<IUser | null> => {
   //   name: "service",
   //   password: "",
   // };
-  console.log(user);
   
   return user;
 };

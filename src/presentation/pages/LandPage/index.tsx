@@ -26,7 +26,6 @@ export const LandPage = () => {
 
   useEffect(() => {
     setCurrentScreen(screenClass);
-    console.log(screenClass);
   }, [setCurrentScreen, screenClass]);
 
   const tiles = [

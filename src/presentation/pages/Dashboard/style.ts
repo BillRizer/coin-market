@@ -28,9 +28,10 @@ export const GroupTiles = styled.div`
 `;
 export const MyWalletContainer = styled.div`
   padding: 24px;
+  margin-top: 32px;
   @media screen and (${device.mobile}) {
-    box-shadow: none!important;
-    background: transparent!important;
+    box-shadow: none !important;
+    background: transparent !important;
   }
 `;
 export const Content = styled.div`
@@ -45,8 +46,15 @@ export const ItemCrypto = styled.div`
   display: flex;
   align-items: center;
   @media screen and (${device.mobile}) {
+    background-color: ${({ theme }) => theme.colors.primary.w100};
+    padding-left: 16px;
+    padding-right: 8px;
+    & .text-label {
+      font-size: 12px;
+    }
   }
 `;
+
 export const ItemHolding = styled.div`
   margin: 0;
   display: flex;
@@ -58,11 +66,13 @@ export const ItemHolding = styled.div`
   @media screen and (${device.mobile}) {
   }
 `;
+
 export const ItemChange = styled.div`
   margin: 0;
   display: flex;
   flex-direction: column;
 `;
+
 export const Actions = styled.div`
   margin: 0;
   display: flex;

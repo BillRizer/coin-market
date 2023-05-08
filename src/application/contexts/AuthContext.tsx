@@ -22,7 +22,6 @@ export const AuthProvider = ({ children }: any) => {
         updateUser(user);
       }
     });
-    console.log("auth useEffect");
   }, []);
 
   const getUserFromLocalStorage = () => {
