@@ -1,16 +1,5 @@
 import styled from "styled-components";
-import { device } from "../../../global/utils/device";
-import BannerBg from "../../../assets/img/banner-bg-min.png";
-
-export const SectionBanner = styled.div`
-  width: 100%;
-  background-image: url(${BannerBg});
-  background-repeat: no-repeat;
-  background-position: bottom;
-  height: 750px;
-  margin-bottom: 100px;
-  background-size: contain;
-`;
+import { device } from "../../../../global/utils/device";
 
 export const ContainerCards = styled.div`
   width: 100%;
@@ -19,7 +8,6 @@ export const ContainerCards = styled.div`
   @media screen and (${device.mobile}) {
     height: 518px;
   }
-
 `;
 
 export const SectionCards = styled.div`
@@ -30,7 +18,7 @@ export const SectionCards = styled.div`
     width: 100%;
     flex-direction: column-reverse;
     height: 100%;
-    & > div{
+    & > div {
       margin-bottom: 32px;
     }
   }
@@ -64,30 +52,4 @@ export const SectionCardsRight = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-export const GroupTiles = styled.div`
-  &.horizontal {
-    width: 1300px;
-    zoom: 0.7;
-  }
-  flex-wrap: wrap;
-  display: flex;
-  justify-content: flex-start;
-  row-gap: 32px;
-  column-gap: 32px;
-  & .reverse {
-    width: auto;
-  }
-  @media screen and (${device.tablet}) {
-    display: flex;
-    width: 100%;
-
-    & .reverse {
-      flex-wrap: wrap;
-      display: flex;
-      justify-content: flex-end;
-      width: 100%;
-    }
-  }
 `;
