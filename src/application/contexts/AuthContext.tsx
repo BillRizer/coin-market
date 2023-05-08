@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { IUser, IUserBasic } from "../types/user";
-import { getUser } from "../services/user";
+import { getUserFromService } from "../services/user";
 
 interface AuthContextData {
   user: IUser | null;
@@ -17,7 +17,7 @@ export const AuthContext = createContext<AuthContextData>(
 export const AuthProvider = ({ children }: any) => {
   const [user, setUser] = useState<IUser | null>(null);
   useEffect(() => {
-    getUser().then((user) => {
+    getUserFromService().then((user) => {
       if (user) {
         updateUser(user);
       }

@@ -32,7 +32,7 @@ import { GridComponent } from "../../shared/components/Grid";
 import { NumberCotationComponent } from "../../shared/components/NumberCotation";
 import { convertToCurrencyFormat } from "../../../global/utils/convert-to-currency";
 import { NotFoundComponent } from "../../shared/components/NotFound";
-import { getCryptosFromApi } from "../../../application/services/crypto";
+import {  getCryptosFromService } from "../../../application/services/crypto";
 import { ICryptos, IListCrypto } from "../../../application/types/crypto";
 import {
   ICrytoAbbrev,
@@ -58,7 +58,7 @@ export const DashboardPage = () => {
       if (user) {
         setWallet(user.wallet);
       }
-      getCryptosFromApi().then((data) => {
+      getCryptosFromService().then((data) => {
         if (data) {
           setCrypto(data);
         }

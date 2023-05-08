@@ -1,7 +1,7 @@
 import { getUserFromApi } from "../../infrastructure/api/v1/user";
 import { IUser } from "../types/user";
 
-export const getUser = async (): Promise<IUser | null> => {
+export const getUserFromService = async (): Promise<IUser | null> => {
   const user = await getUserFromApi();
 
   // const user: IUser = {
