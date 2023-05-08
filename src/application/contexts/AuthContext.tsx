@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { IUser, IUserBasic } from "../types/user";
 import { getUserFromService } from "../services/user";
+import * as localStorageInfra from "../../infrastructure/local-storage";
 
 interface AuthContextData {
   user: IUser | null;
@@ -25,27 +26,29 @@ export const AuthProvider = ({ children }: any) => {
   }, []);
 
   const getUserFromLocalStorage = () => {
-    const userStorage = localStorage.getItem("user");
-    if (!userStorage) return null;
-    return JSON.parse(userStorage);
+    return localStorageInfra.get("user");
   };
   const updateUser = (user: IUser) => {
+    localStorageInfra.set("user", user);
     setUser(user);
-    localStorage.setItem("user", JSON.stringify(user));
     return user;
   };
 
   const signIn = async (user: IUser) => {
-    setUser(user);
-    localStorage.setItem("user", JSON.stringify(user));
-    console.log("funcao sigin");
-    return user;
+    return getDefaultUser();
   };
+
   const signUp = async (user: IUser) => {
-    setUser(user);
-    localStorage.setItem("user", JSON.stringify(user));
-    console.log("funcao signUp");
-    return user;
+    return getDefaultUser();
+  };
+  const getDefaultUser = async () => {
+    const defaultUser = await getUserFromService();
+    if (!defaultUser) {
+      throw new Error("Can't get dafault user from API");
+    }
+    setUser(defaultUser);
+    localStorageInfra.set("user", defaultUser);
+    return defaultUser;
   };
   const signOut = () => {
     setUser(null);
