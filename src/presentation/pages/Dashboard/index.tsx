@@ -32,7 +32,7 @@ import { GridComponent } from "../../shared/components/Grid";
 import { NumberCotationComponent } from "../../shared/components/NumberCotation";
 import { convertToCurrencyFormat } from "../../../global/utils/convert-to-currency";
 import { NotFoundComponent } from "../../shared/components/NotFound";
-import {  getCryptosFromService } from "../../../application/services/crypto";
+import { getCryptosFromService } from "../../../application/services/crypto";
 import { ICryptos, IListCrypto } from "../../../application/types/crypto";
 import {
   ICrytoAbbrev,
@@ -94,20 +94,31 @@ export const DashboardPage = () => {
     transfer: string,
     cryptoAbbrev: ICrytoAbbrev
   ) => {
-    if (!crypto || !wallet) {
+    if (!crypto || !wallet || quantity <= 0) {
       return;
     }
-    let amount = quantity / crypto[cryptoAbbrev].unit;
-    const walletAmount =
-      crypto[cryptoAbbrev].unit * wallet[cryptoAbbrev].amount;
-    if (amount > walletAmount) {
-      amount = walletAmount;
+    const unit = crypto[cryptoAbbrev].unit;
+    const walletAmount = wallet[cryptoAbbrev].amount;
+
+    let amountCrypto = +(quantity / unit).toFixed(2);
+    let amountMoney = +(quantity * unit).toFixed(2);
+    const walletAmountCrypto = +(walletAmount / unit).toFixed(2);
+    const walletAmountMoney = +(walletAmount * unit).toFixed(2);
+
+    if (amountMoney > walletAmountMoney) {
+      amountCrypto = walletAmountCrypto;
+      amountMoney = walletAmountMoney;
     }
-    wallet[cryptoAbbrev].amount -= amount;
+    console.log(amountCrypto);
+    console.log(amountMoney);
+    console.log(crypto[cryptoAbbrev]);
+    console.log(wallet[cryptoAbbrev]);
+
+    wallet[cryptoAbbrev].amount = walletAmountCrypto + amountCrypto;
     // updateWallet(wallet, cryptoAbbrev, quantity);
     console.log(wallet, cryptoAbbrev, quantity);
     setWallet(wallet);
-    setBalance((balance || 0) - amount);
+    setBalance((balance || 0) - walletAmountMoney);
     hideModal();
   };
 

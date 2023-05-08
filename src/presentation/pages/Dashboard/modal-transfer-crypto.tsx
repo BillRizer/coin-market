@@ -38,7 +38,11 @@ export const ModalTransferCrypto = ({ cryptoAbbrev, callback }: Props) => {
       return;
     }
     const quantityParsed: number = Number(quantity);
-    if (quantity.trim() === "" || isNaN(quantityParsed)) {
+    if (
+      quantity.trim() === "" ||
+      isNaN(quantityParsed) ||
+      quantityParsed <= 0
+    ) {
       setError("Por favor, Informe uma quantidade válida.");
       return;
     }
@@ -64,6 +68,7 @@ export const ModalTransferCrypto = ({ cryptoAbbrev, callback }: Props) => {
             { label: "Transfer Out", value: "transfer_out" },
             { label: "Transfer In", value: "transfer_in" },
           ]}
+          placeholder="Select Transfer"
           error={error}
         />
         <InputComponent
@@ -75,7 +80,7 @@ export const ModalTransferCrypto = ({ cryptoAbbrev, callback }: Props) => {
           error={error}
           placeholder="0,00"
         />
-         {error && <div className="text-label center">{error}</div>}
+        {error && <div className="text-label center">{error}</div>}
         <ButtonComponent color="primary" size="medium" className="full-width">
           Transfer Crypto
         </ButtonComponent>

@@ -8,13 +8,13 @@ import { FiLock, FiMail } from "react-icons/fi";
 import { useModal } from "../../../application/hook/modal";
 import { ModalSignUp } from "./modal-signup";
 import { useAuth } from "../../../application/hook/useAuth";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface Props {}
 
 export const ModalSignIn = ({}: Props) => {
   const [email, setEmail] = useState<string>("");
-  const { showModal,hideModal } = useModal();
+  const { showModal, hideModal } = useModal();
   const { signIn } = useAuth();
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState("");
@@ -35,8 +35,8 @@ export const ModalSignIn = ({}: Props) => {
       return;
     }
     signIn({ email, password });
-    navigate('/private');
-    hideModal()
+    navigate("/private");
+    hideModal();
   };
 
   return (
