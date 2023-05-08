@@ -137,6 +137,9 @@ h5{
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
 }
+.pointer{
+    cursor: pointer;
+}
 `;
 
 export default GlobalStyle;

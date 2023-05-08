@@ -2,7 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import * as S from "./style";
 import { IconComponent } from "../Icon";
 import { useScrollBlock } from "../../../../application/hook/useScrollBlock";
-import CoverSubBanner from "../../../../assets/img/sub-banner.svg";
+import CoverSubBanner from "../../../../assets/img/banner-min.png";
+import BannerBg from "../../../../assets/img/banner-bg-min.png";
 
 interface Props {
   images: Array<string>;
@@ -14,28 +15,8 @@ export const BannerCarrouselComponent = ({ images }: Props) => {
   const [blockScroll, allowScroll] = useScrollBlock();
 
   return (
-    <>
-      <div
-        ref={ref}
-        style={{ width: "100%", height: "665px", position: "relative" }}
-      >
-        {images.map((image, index) => (
-          <img
-            key={index}
-            src={image}
-            style={{
-              width: "100%",
-              height: "100%",
-              position: "absolute",
-              top: 0,
-              left: 0,
-              opacity: index === currentImage ? 1 : 0,
-              transition: "opacity 1s ease-in-out",
-            }}
-          />
-        ))}
-      </div>
-      {/* <img src={CoverSubBanner} alt="background banner" /> */}
-    </>
+    <S.BannerWrapper >
+      {<S.Image src={CoverSubBanner} />}
+    </S.BannerWrapper>
   );
 };

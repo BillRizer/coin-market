@@ -3,20 +3,16 @@ interface PropsInputElement {
   haveIcon: boolean;
 }
 
-export const InputContainer = styled.div`
+export const Icon = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 41px;
+  height: 48px;
   display: flex;
-  flex-direction: column;
-  margin-bottom: 16px;
-  position: relative;
-  & .icon {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 41px;
-    height: 48px;
-    display: flex;
-  }
-  & .icon > div {
+  align-items: center;
+  justify-content: center;
+  &  div {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,6 +20,12 @@ export const InputContainer = styled.div`
     height: 100%;
     color: ${(props) => props.theme.colors.secondary.w300};
   }
+`;
+export const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  position: relative;
 `;
 
 export const Label = styled.label`

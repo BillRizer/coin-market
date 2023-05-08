@@ -13,15 +13,13 @@ import { Col, Row, Container, useScreenClass } from "react-grid-system";
 import { JumbotronComponent } from "../../shared/components/Jumbotron";
 import { Table } from "./table";
 import { Form } from "./form";
+import { ModalSignIn } from "../../shared/dialogs/modal-signin";
 
 export const LandPage = () => {
-  const { showModal } = useModal();
+  const { showModal, hideModal } = useModal();
   const [currentScreen, setCurrentScreen] = useState<any>(null);
 
-  const images = [
-    "https://placeimg.com/640/480/nature",
-   
-  ];
+  const images = ["https://placeimg.com/640/480/nature"];
   const screenClass = useScreenClass();
 
   useEffect(() => {
@@ -54,6 +52,13 @@ export const LandPage = () => {
       text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, ",
     },
   ];
+
+
+  const handleSignInModal = () => {
+    showModal({
+      body: <ModalSignIn  />,
+    });
+  };
 
   function tileList() {
     return (
@@ -105,7 +110,11 @@ export const LandPage = () => {
               title="Lorem ipsum "
               text="Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor"
             >
-              <ButtonComponent size="medium" color="primary">
+              <ButtonComponent
+                size="medium"
+                color="primary"
+                onClick={() => handleSignInModal()}
+              >
                 Sign up now
               </ButtonComponent>
             </JumbotronComponent>

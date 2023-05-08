@@ -1,10 +1,10 @@
 import React, { InputHTMLAttributes } from "react";
-import * as Styled from "./style";
+import * as S from "./style";
 import { IconComponent } from "../Icon";
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   id: string;
-  
+
   value: string;
   onChange: any;
   error?: string;
@@ -14,7 +14,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 export const InputComponent = ({
   label,
   id,
-  
+
   value,
   onChange,
   placeholder,
@@ -24,25 +24,22 @@ export const InputComponent = ({
 }: Props) => {
   const errorMessage = "";
   return (
-    <Styled.InputContainer>
+    <S.InputContainer>
       {/* <Styled.Label htmlFor={id}>{label}</Styled.Label> */}
       {Icon && (
-        <div className="icon">
+        <S.Icon>
           <IconComponent Icon={Icon} size="16px" />
-        </div>
+        </S.Icon>
       )}
-      <Styled.InputElement
+      <S.InputElement
         id={id}
-        
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         haveIcon={!!Icon}
         {...rest}
       />
-      {errorMessage && (
-        <Styled.ErrorMessage>{errorMessage}</Styled.ErrorMessage>
-      )}
-    </Styled.InputContainer>
+      {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
+    </S.InputContainer>
   );
 };

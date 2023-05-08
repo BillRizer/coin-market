@@ -1,12 +1,17 @@
 import styled, { css } from "styled-components";
-import { theme } from "../../../../global/styles/theme-base";
+import BannerBg from "../../../../assets/img/banner-bg-min.png";
 
 export const BannerWrapper = styled.div`
-  height: 500px;
-  background-color: #ccc;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 3rem;
-  color: white;
+  height: 750px;
+  background-image: url(${BannerBg});
+  background-repeat: no-repeat;
+  background-position: bottom;
+  margin-bottom: 100px;
+  overflow: hidden;
+  background-position-y: calc(100% - 24px);
+`;
+export const Image = styled.img`
+  max-height: 499px;
+  transition: "opacity 1s ease-in-out";
+  margin-left: 47%;
 `;

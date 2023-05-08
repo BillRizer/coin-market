@@ -17,6 +17,9 @@ import {
 import { AvatarComponent } from "./Avatar";
 import { useAuth } from "../../../../application/hook/useAuth";
 import { SidebarComponent } from "../Sidebar";
+import { ModalSignIn } from "../../dialogs/modal-signin";
+import { useModal } from "../../../../application/hook/modal";
+import { ModalSignUp } from "../../dialogs/modal-signup";
 
 interface Props {
   isLogged: boolean;
@@ -24,7 +27,8 @@ interface Props {
 
 export const NavComponent = ({ isLogged }: Props) => {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
-  const { user,signOut } = useAuth();
+  const { user, signOut } = useAuth();
+  const { showModal } = useModal();
   const [cacheUser, setCacheUser] = useState<any>();
 
   useEffect(() => {
@@ -48,8 +52,17 @@ export const NavComponent = ({ isLogged }: Props) => {
       </S.Hamburger>
     );
   };
-  // const HamburguerComponent = () => {};
-  // const HamburguerComponent = () => {};
+  const handleSignInModal = () => {
+    showModal({
+      body: <ModalSignIn />,
+    });
+  };
+  const handleSignUpModal = () => {
+    showModal({
+      body: <ModalSignUp />,
+    });
+  };
+
   return (
     <>
       <Container fluid={isLogged}>
@@ -79,7 +92,7 @@ export const NavComponent = ({ isLogged }: Props) => {
                         icon: IconLogOff,
                         label: "logoff",
                         callback: () => {
-                          signOut()
+                          signOut();
                         },
                       },
                     ]}
@@ -106,10 +119,19 @@ export const NavComponent = ({ isLogged }: Props) => {
                       </S.Item>
                     </Visible>
                     <S.Item>
-                      <Link className="p" to={""}>
+                      <Link
+                        className="p"
+                        to={"#"}
+                        onClick={handleSignInModal}
+                        style={{ marginRight: "24px",paddingLeft:'24px' }}
+                      >
                         Sign in
                       </Link>
-                      <ButtonComponent color="primary" size="small">
+                      <ButtonComponent
+                        color="primary"
+                        size="small"
+                        onClick={handleSignUpModal}
+                      >
                         Sign up
                       </ButtonComponent>
                     </S.Item>
@@ -121,7 +143,10 @@ export const NavComponent = ({ isLogged }: Props) => {
         </Row>
         {isNavExpanded && (
           <S.MenuSidebarContainer>
-            <SidebarComponent isResponsive={false} defaultIsOpen={true} ></SidebarComponent>
+            <SidebarComponent
+              isResponsive={false}
+              defaultIsOpen={true}
+            ></SidebarComponent>
           </S.MenuSidebarContainer>
         )}
       </Container>
