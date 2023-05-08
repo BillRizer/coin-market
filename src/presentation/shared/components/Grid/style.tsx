@@ -7,14 +7,19 @@ const NotFound = css`
   align-items: center;
   justify-content: center;
 `;
-export const Container = styled.div<{ size?: Array<string>; isEmpty: boolean }>`
+interface ContainerProps {
+  size?: Array<string>;
+  isEmpty: boolean;
+  mobileCols: string;
+}
+export const Container = styled.div<ContainerProps>`
   display: grid;
   grid-template-rows: 1fr;
 
   ${({ isEmpty }) => isEmpty && NotFound}
   @media screen and (${device.mobile}) {
     box-shadow: none;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: ${({ mobileCols }) => mobileCols};
     column-gap: 16px;
     row-gap: 16px;
     padding: 0 16px;

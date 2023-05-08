@@ -9,6 +9,7 @@ interface Props {
   showHeader?: boolean;
   children: ReactNode;
   isEmpty?: boolean;
+  mobileCols?: string;
 }
 
 export const GridComponent = ({
@@ -16,10 +17,11 @@ export const GridComponent = ({
   isEmpty = false,
   header,
   children,
+  mobileCols = "1fr 1fr",
 }: Props) => {
   const size: Array<string> = header.map(({ size }): string => size || "");
   return (
-    <S.Container isEmpty={isEmpty} size={size}>
+    <S.Container isEmpty={isEmpty} size={size} mobileCols={mobileCols}>
       {showHeader && (
         <S.Header>
           {header.map(({ label, size }) => (
