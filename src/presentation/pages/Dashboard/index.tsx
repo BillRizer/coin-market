@@ -33,18 +33,22 @@ import { NumberCotationComponent } from "../../shared/components/NumberCotation"
 import { convertToCurrencyFormat } from "../../../global/utils/convert-to-currency";
 import { NotFoundComponent } from "../../shared/components/NotFound";
 import { getCryptosFromApi } from "../../../application/services/crypto";
-import { ICryptos } from "../../../application/types/crypto";
+import { ICryptos, IListCrypto } from "../../../application/types/crypto";
 import {
   ICrytoAbbrev,
   getCryptoIconUsingAbrev,
 } from "../../../application/constants/crypto";
 import { IWallet } from "../../../application/types/wallet";
+import { useModal } from "../../../application/hook/modal";
+import { ModalTransferCrypto } from "./modal-transfer-crypto";
+import { ModalAddCrypto } from "./modal-add-crypto";
 
 export const DashboardPage = () => {
-  const { user, signOut, signIn } = useAuth();
+  const { user } = useAuth();
   const [crypto, setCrypto] = useState<ICryptos>();
   const [wallet, setWallet] = useState<IWallet>();
   const [balance, setBalance] = useState<number | null>(null);
+  const { showModal, hideModal } = useModal();
 
   const currentScreen = useScreenClass();
   const isMobile = currentScreen == "xs";
@@ -61,27 +65,15 @@ export const DashboardPage = () => {
       });
     }
     if (wallet && crypto) {
-      calcTotalBalance(wallet, crypto);
-    }
-    // calcTotalBalance(wallet, crypto);
-  }, [wallet, crypto]);
-
-  const calcTotalBalance = useCallback(
-    (wallet: IWallet, crypto: ICryptos) => {
-      console.log(wallet);
-
       let total = 0;
       for (const index of Object.keys(wallet)) {
         total += wallet[index].amount * crypto[index].unit;
       }
       setBalance(total);
-      console.log(total);
-    },
-    [wallet, crypto, setBalance]
-  );
-  const handleSignIn = () => {
-    signIn({ email: "AYUsdhas@asudhas.com", password: "asd" });
-  };
+      console.log("update total balance");
+    }
+    // calcTotalBalance(wallet, crypto);
+  }, [wallet, crypto, balance]);
 
   const calcHolding = (cotation: number, amount: number): number => {
     return cotation * amount;
@@ -96,6 +88,71 @@ export const DashboardPage = () => {
   const cotationText = (cotation: number, index: ICrytoAbbrev): string => {
     return `${cotation} ${index.toUpperCase()}`;
   };
+
+  const callbackTradeCryptoModal = (
+    quantity: number,
+    transfer: string,
+    cryptoAbbrev: ICrytoAbbrev
+  ) => {
+    if (!crypto || !wallet) {
+      return;
+    }
+    let amount = quantity / crypto[cryptoAbbrev].unit;
+    const walletAmount =
+      crypto[cryptoAbbrev].unit * wallet[cryptoAbbrev].amount;
+    if (amount > walletAmount) {
+      amount = walletAmount;
+    }
+    wallet[cryptoAbbrev].amount -= amount;
+    // updateWallet(wallet, cryptoAbbrev, quantity);
+    console.log(wallet, cryptoAbbrev, quantity);
+    setWallet(wallet);
+    setBalance((balance || 0) - amount);
+    hideModal();
+  };
+
+  const handleTradeModal = (abrev: ICrytoAbbrev, label: string) => {
+    showModal({
+      body: (
+        <ModalTransferCrypto
+          callback={callbackTradeCryptoModal}
+          cryptoAbbrev={abrev}
+        />
+      ),
+    });
+  };
+
+  const callbackAddCryptoModal = (
+    quantity: number,
+    cryptoAbbrev: ICrytoAbbrev
+  ) => {
+    if (!crypto || !wallet) {
+      return;
+    }
+
+    const amount = quantity / crypto[cryptoAbbrev].unit;
+    wallet[cryptoAbbrev].amount += amount;
+    console.log("depois", wallet);
+    setWallet(wallet);
+    setBalance((balance || 0) + amount);
+    hideModal();
+  };
+  const handleAddModal = () => {
+    if (!crypto || !wallet) {
+      return;
+    }
+    const options = Object.keys(crypto).map((index) => ({
+      abbrev: index,
+      label: crypto[index].label,
+      icon: getCryptoIconUsingAbrev(index as ICrytoAbbrev),
+    }));
+    showModal({
+      body: (
+        <ModalAddCrypto callback={callbackAddCryptoModal} crypto={options} />
+      ),
+    });
+  };
+
   return (
     <div>
       <Container>
@@ -140,13 +197,16 @@ export const DashboardPage = () => {
                   color="primary"
                   size="small"
                   Icon={IconPlus}
+                  iconMarginRight="8px"
                   label="Add crypto"
                   isResponsive
+                  onClick={() => handleAddModal()}
                 ></ButtonComponent>
               </TitleRowComponent>
-              <S.Content>
+              <S.Content style={{ marginLeft: "-24px", marginRight: "-24px" }}>
                 <GridComponent
-                  showHeader={isMobile ? false : true}
+                  showHeader={isMobile || !balance ? false : true}
+                  isEmpty={!balance}
                   header={[
                     { label: "#", size: "0.2fr" },
                     { label: "Crypto", size: "1fr" },
@@ -156,66 +216,75 @@ export const DashboardPage = () => {
                   ]}
                 >
                   {wallet && crypto ? (
-                    Object.keys(wallet).map((index, k) => (
-                      <div key={k}>
-                        <Hidden xs>
-                          <div className="text-label">0{k + 1}</div>
-                        </Hidden>
-                        <S.ItemCrypto>
-                          <IconComponent
-                            marginRight={isMobile ? "8px" : "16px"}
-                            Icon={getCryptoIconUsingAbrev(
-                              index as ICrytoAbbrev
-                            )}
-                            size={isMobile ? "16px" : "32px"}
-                          ></IconComponent>{" "}
-                          <div className="text-label">
-                            {crypto[index].label}{" "}
-                            {crypto[index].abbreviated.toUpperCase()}
-                          </div>
-                        </S.ItemCrypto>
-                        <S.ItemHolding>
-                          <Visible xs>
-                            <div className="text-label title">Holding</div>
-                          </Visible>
-                          <div className="text-label ">
-                            {calcHoldingText(
-                              crypto[index].unit,
-                              wallet[index].amount
-                            )}
-                          </div>
+                    Object.keys(wallet).map(
+                      (index, k) =>
+                        wallet[index].amount > 0 && (
+                          <div key={k}>
+                            <Hidden xs>
+                              <div className="text-label">0{k + 1}</div>
+                            </Hidden>
+                            <S.ItemCrypto>
+                              <IconComponent
+                                marginRight={isMobile ? "8px" : "16px"}
+                                Icon={getCryptoIconUsingAbrev(
+                                  index as ICrytoAbbrev
+                                )}
+                                size={isMobile ? "16px" : "32px"}
+                              ></IconComponent>{" "}
+                              <div className="text-label">
+                                {crypto[index].label}{" "}
+                                {crypto[index].abbreviated.toUpperCase()}
+                              </div>
+                            </S.ItemCrypto>
+                            <S.ItemHolding>
+                              <Visible xs>
+                                <div className="text-label title">Holding</div>
+                              </Visible>
+                              <div className="text-label ">
+                                {calcHoldingText(
+                                  crypto[index].unit,
+                                  wallet[index].amount
+                                )}
+                              </div>
 
-                          <div className="text-small-label">
-                            {cotationText(
-                              wallet[index].amount,
-                              index as ICrytoAbbrev
-                            )}
-                          </div>
-                        </S.ItemHolding>
+                              <div className="text-small-label">
+                                {cotationText(
+                                  wallet[index].amount,
+                                  index as ICrytoAbbrev
+                                )}
+                              </div>
+                            </S.ItemHolding>
 
-                        <S.ItemChange>
-                          <Visible xs>
-                            <div className="text-label">Change</div>
-                          </Visible>
-                          <NumberCotationComponent
-                            className="text-label"
-                            showSignal
-                            num={crypto[index].change}
-                            sufix="%"
-                          />
-                        </S.ItemChange>
-                        <S.ItemHolding>
-                          {isMobile ? (
-                            <ButtonComponent></ButtonComponent>
-                          ) : (
-                            <IconComponent
-                              Icon={iconTrade}
-                              size="24px"
-                            ></IconComponent>
-                          )}
-                        </S.ItemHolding>
-                      </div>
-                    ))
+                            <S.ItemChange>
+                              <Visible xs>
+                                <div className="text-label">Change</div>
+                              </Visible>
+                              <NumberCotationComponent
+                                className="text-label"
+                                showSignal
+                                num={crypto[index].change}
+                                sufix="%"
+                              />
+                            </S.ItemChange>
+                            <S.ItemHolding>
+                              {isMobile ? (
+                                <ButtonComponent></ButtonComponent>
+                              ) : (
+                                <IconComponent
+                                  Icon={iconTrade}
+                                  size="24px"
+                                  onClick={() =>
+                                    handleTradeModal(
+                                      index as ICrytoAbbrev,
+                                      crypto[index].label
+                                    )
+                                  }
+                                ></IconComponent>
+                              )}
+                            </S.ItemHolding>
+                          </div>
+                        )
+                    )
                   ) : (
                     <NotFoundComponent
                       image={IconNotFoundWallet}
@@ -228,7 +297,6 @@ export const DashboardPage = () => {
             </S.MyWalletContainer>
           </Col>
         </Row>
-        <button onClick={handleSignIn}>login</button>
       </Container>
     </div>
   );

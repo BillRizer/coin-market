@@ -11,19 +11,22 @@ export const Container = styled.div`
 `;
 const MenuOpen = css`
   width: auto;
-  transition:width 1s;
+  transition: width 1s;
 `;
-export const Menu = styled.div<{ isOpen: boolean }>`
+export const Menu = styled.div<{ isOpen: boolean; isResponsive: boolean }>`
   width: 86px;
   background: ${(p) => `${p.theme.colors.white}`};
   height: 100vh;
   display: block;
   position: relative;
   ${({ isOpen }) => isOpen && MenuOpen}
-  
+  ${({ isResponsive }) =>
+    isResponsive &&
+    `
   @media screen and (${device.tablet}) {
     display: none;
   }
+  `}
 `;
 
 export const Item = styled.div<{ isOpen?: boolean }>`
@@ -31,7 +34,7 @@ export const Item = styled.div<{ isOpen?: boolean }>`
   align-items: center;
   justify-content: center;
   display: flex;
-  & >div{
+  & > div {
     margin-right: 16px;
   }
 `;
@@ -42,5 +45,5 @@ export const ToogleIcon = styled.img<{ isOpen?: boolean }>`
   height: 32px;
   margin-left: -18px;
   transform: rotate(180deg)
-  ${({ isOpen }) => isOpen && `transform: rotate(180deg)`}
+    ${({ isOpen }) => isOpen && `transform: rotate(180deg)`};
 `;

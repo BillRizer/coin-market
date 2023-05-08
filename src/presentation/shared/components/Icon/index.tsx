@@ -27,7 +27,13 @@ export const IconComponent = ({
       cursorPointer
       onClick={onClick}
       className={`${disabled ? "disabled" : ""} ${size}`}
-      style={{ width: size, height: size, marginRight, marginLeft }}
+      style={{
+        width: size,
+        height: size,
+        fontSize: size,
+        marginRight,
+        marginLeft,
+      }}
       {...props}
     >
       {typeof Icon === "string" ? <img src={Icon} alt="" /> : <Icon />}

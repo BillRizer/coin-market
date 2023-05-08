@@ -27,7 +27,7 @@ const ModalComponent: React.FC<IProps> = ({ isActive, payload }) => {
             hideModal();
           }}
         >
-          <IconComponent Icon={FiX} size="24px" />
+          <IconComponent Icon={FiX} size="16px" />
         </Close>
         <div>{payload?.body}</div>
       </Modal>

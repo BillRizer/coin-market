@@ -1,6 +1,15 @@
 import styled, { css } from "styled-components";
 import { device } from "../../../../global/utils/device";
-export const Navigation = styled.div`
+
+const NavigationLogged = css`
+  margin-left: -16px;
+  padding-left: 16px;
+  margin-right: -16px;
+  padding-right: 16px;
+  width: calc(100% + 32px);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 15px;
+`;
+export const Navigation = styled.div<{ isLogged: boolean }>`
   position: relative;
   display: flex;
   align-items: center;
@@ -8,11 +17,13 @@ export const Navigation = styled.div`
   width: 100%;
   background-color: ${(p) => `${p.theme.colors.white}`};
   justify-content: space-between;
+  border-bottom: 1px solid ${(p) => `${p.theme.colors.secondary.w200}`};
+  ${({ isLogged }) => isLogged && NavigationLogged}
 `;
 export const Brand = styled.div`
   text-decoration: none;
   color: black;
-  
+
   margin-right: 41px;
   &.is-logged {
     flex: 1;
@@ -94,7 +105,14 @@ export const Item = styled.div`
 `;
 export const Line = styled.div`
   display: flex;
-    align-items: center;
-    width: 100%;
-    justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  justify-content: space-around;
+`;
+
+export const MenuSidebarContainer = styled.div`
+  z-index: 99;
+  width: 100%;
+  background: rgba(112, 110, 120, 0.9);
+  position: absolute;
 `;

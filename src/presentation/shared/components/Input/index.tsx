@@ -4,7 +4,7 @@ import { IconComponent } from "../Icon";
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   id: string;
-  type: string;
+  
   value: string;
   onChange: any;
   error?: string;
@@ -14,7 +14,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 export const InputComponent = ({
   label,
   id,
-  type,
+  
   value,
   onChange,
   placeholder,
@@ -33,7 +33,7 @@ export const InputComponent = ({
       )}
       <Styled.InputElement
         id={id}
-        type={type}
+        
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}

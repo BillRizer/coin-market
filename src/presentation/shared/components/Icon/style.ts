@@ -5,7 +5,7 @@ interface Props{
 export const Icon = styled.div<Props>`
 display: flex;
    
-    &.small{
+    /* &.small{
         width: 14px;
         height: 14px;
         font-size: 14px;
@@ -24,7 +24,7 @@ display: flex;
         width: 32px;
         height: 32px;
         font-size: 32px;
-    }
+    } */
     ${(props) => props.cursorPointer ? `cursor:pointer;`:''}
     &.disabled {
     cursor: not-allowed!important;

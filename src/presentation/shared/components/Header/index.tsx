@@ -16,6 +16,7 @@ import {
 } from "react-grid-system";
 import { AvatarComponent } from "./Avatar";
 import { useAuth } from "../../../../application/hook/useAuth";
+import { SidebarComponent } from "../Sidebar";
 
 interface Props {
   isLogged: boolean;
@@ -23,7 +24,7 @@ interface Props {
 
 export const NavComponent = ({ isLogged }: Props) => {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
-  const { user } = useAuth();
+  const { user,signOut } = useAuth();
   const [cacheUser, setCacheUser] = useState<any>();
 
   useEffect(() => {
@@ -54,7 +55,7 @@ export const NavComponent = ({ isLogged }: Props) => {
       <Container fluid={isLogged}>
         <Row>
           <Col lg={12}>
-            <S.Navigation>
+            <S.Navigation isLogged={isLogged}>
               <Visible sm={true} md={isLogged}>
                 <HamburguerComponent />
               </Visible>
@@ -78,7 +79,7 @@ export const NavComponent = ({ isLogged }: Props) => {
                         icon: IconLogOff,
                         label: "logoff",
                         callback: () => {
-                          alert("oi");
+                          signOut()
                         },
                       },
                     ]}
@@ -118,6 +119,11 @@ export const NavComponent = ({ isLogged }: Props) => {
             </S.Navigation>
           </Col>
         </Row>
+        {isNavExpanded && (
+          <S.MenuSidebarContainer>
+            <SidebarComponent isResponsive={false} defaultIsOpen={true} ></SidebarComponent>
+          </S.MenuSidebarContainer>
+        )}
       </Container>
       {isLogged === false && (
         <div>

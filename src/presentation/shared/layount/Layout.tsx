@@ -3,7 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 import { FooterComponent } from "../components/Footer";
 import { NavComponent } from "../components/Header";
 import { SidebarComponent } from "../components/Sidebar";
-
+import * as S from './style'
 interface Props {
   isLogged: boolean;
 }
@@ -12,9 +12,10 @@ export const LayoutContainer = ({ isLogged }: Props) => {
     <div>
       <NavComponent isLogged={isLogged}></NavComponent>
       {isLogged ? (
-        <SidebarComponent>
+        <S.Container>
+          <SidebarComponent />
           <Outlet />
-        </SidebarComponent>
+        </S.Container>
       ) : (
         <Outlet />
       )}

@@ -17,3 +17,10 @@ export interface ICrypto {
 export interface ICryptos {
   [key: string]: ICrypto;
 }
+
+interface IListItemCrypto {
+  abbrev: string;
+  label: string;
+  icon?: string;
+}
+export interface IListCrypto extends Array<IListItemCrypto> {}

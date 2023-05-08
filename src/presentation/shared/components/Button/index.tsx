@@ -5,6 +5,8 @@ import { IconComponent } from "../Icon";
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   onClick?: any;
   Icon?: any;
+  iconMarginRight?: string;
+  iconMarginLeft?: string;
   label?: string;
   isResponsive?: boolean;
   color?: "primary" | "secondary" | "tertiary";
@@ -15,6 +17,8 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 export const ButtonComponent = ({
   children,
   onClick,
+  iconMarginRight,
+  iconMarginLeft,
   Icon,
   label,
   color = "primary",
@@ -29,7 +33,9 @@ export const ButtonComponent = ({
   };
   return (
     <Styled.Button onClick={onClick} color={color} size={size} {...rest}>
-      {Icon && <IconComponent Icon={Icon} size={iconSize(size)} />}
+      {Icon && (
+        <IconComponent Icon={Icon} size={iconSize(size)} marginRight={iconMarginRight} marginLeft={iconMarginLeft} />
+      )}
       {label ? label : children}
     </Styled.Button>
   );
