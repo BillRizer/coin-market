@@ -30,7 +30,8 @@ export const InputContainer = styled.div`
 
 export const Label = styled.label`
   margin-bottom: 8px;
-  font-weight: bold;
+  font-size: 14px;
+  color:${(props) => props.theme.colors.secondary.base}
 `;
 
 export const InputElement = styled.input<PropsInputElement>`

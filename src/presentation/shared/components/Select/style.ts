@@ -8,6 +8,8 @@ export const SelectContainer = styled.div`
 
 export const Label = styled.label`
   margin-bottom: 0.5rem;
+  font-size: 14px;
+  color:${(props) => props.theme.colors.secondary.base}
 `;
 
 export const StyledSelect = styled.select`

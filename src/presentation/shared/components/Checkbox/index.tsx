@@ -1,24 +1,24 @@
-import React, { useState } from "react";
+import React, { ReactElement, useState } from "react";
 import * as Styled from "./style";
 
 interface Props {
   onChange?: any;
   checked?: boolean;
-  children?: string;
+  children?:any;
 }
 
 export const CheckboxComponent = ({
   onChange,
-  checked ,
+  checked,
   children,
   ...props
 }: Props) => {
   return (
     <Styled.Container>
-      <Styled.CheckboxSimbol >
-        <input type="checkbox" defaultChecked={checked} onChange={onChange} />
+      <Styled.CheckboxSimbol>
+        <input type="checkbox" defaultChecked={false} onChange={onChange} />
       </Styled.CheckboxSimbol>
-      <Styled.Text >{children}</Styled.Text>
+      <Styled.Text>{children}</Styled.Text>
     </Styled.Container>
   );
 };

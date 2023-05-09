@@ -4,10 +4,12 @@ import { theme } from "../../../../global/styles/theme-base";
 
 export const Container = styled.div`
   display: flex;
+  margin-bottom: 15px;
 `;
 
 export const Text = styled.div`
   margin-top: 3px;
+  color: ${({theme}) => theme.colors.textBase}
 `;
 export const CheckboxSimbol = styled.div`
   input[type="checkbox"] {

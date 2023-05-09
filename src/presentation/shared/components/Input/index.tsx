@@ -2,7 +2,7 @@ import React, { InputHTMLAttributes } from "react";
 import * as S from "./style";
 import { IconComponent } from "../Icon";
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  label: string;
+  label?: string;
   id: string;
 
   value: string;
@@ -25,6 +25,7 @@ export const InputComponent = ({
   const errorMessage = "";
   return (
     <S.InputContainer>
+      {label && <S.Label htmlFor={id}>{label}</S.Label>}
       {/* <Styled.Label htmlFor={id}>{label}</Styled.Label> */}
       {Icon && (
         <S.Icon>
