@@ -3,7 +3,7 @@ import { device } from "../../../../global/utils/device";
 
 export const ContainerCards = styled.div`
   width: 100%;
-  height: 818px;
+  height: 610px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #f7f7f7 100%);
   @media screen and (${device.mobile}) {
     height: 518px;

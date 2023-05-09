@@ -77,5 +77,9 @@ export const Button = styled.button`
   .icon {
     margin-right: 8px;
   }
+  &:disabled{
+    background-color: ${({ theme }) => theme.colors.secondary.base};
+    cursor: not-allowed
+  }
 `;
 

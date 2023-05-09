@@ -114,7 +114,13 @@ export const TopCryptoGridContainer = ({ cryptos }: Props) => {
             setShowMore(!showMore);
           }}
         >
-          View more <span style={{ fontSize: "16px" }}>+ </span>
+          {!showMore ? (
+            <span className="pointer">
+              View more <span style={{ fontSize: "16px" }}>+ </span>
+            </span>
+          ) : (
+            <span className="pointer">View less</span>
+          )}
         </div>
       </S.Content>
     </>

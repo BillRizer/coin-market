@@ -140,6 +140,21 @@ h5{
 .pointer{
     cursor: pointer;
 }
+.loading-icon {
+  color: teal;
+  font-size: 2rem;
+  animation: animate 2s infinite;
+  margin-right:10px;
+  margin-left:10px;
+}
+@keyframes animate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(1080deg);
+  }
+}
 `;
 
 export default GlobalStyle;
