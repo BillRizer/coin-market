@@ -12,5 +12,11 @@ export interface ICryptoDto {
   change: number;
   historygram: Array<IHistorygram>;
 }
-
 export interface ICryptosDto extends Array<ICryptoDto> {}
+
+export interface IMarqueeCotationDto {
+  label: string;
+  value: number;
+  change: number;
+}
+export interface IMarqueeCotationsDto extends Array<IMarqueeCotationDto> {}

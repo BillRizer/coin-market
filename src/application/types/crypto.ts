@@ -24,3 +24,11 @@ interface IListItemCrypto {
   icon?: string;
 }
 export interface IListCrypto extends Array<IListItemCrypto> {}
+
+export interface IMarqueeCotation {
+  label: string;
+  value: number;
+  change: number;
+}
+
+export interface IMarqueeCotations extends Array<IMarqueeCotation> {}

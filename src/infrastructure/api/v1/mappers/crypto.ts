@@ -2,14 +2,13 @@ import {
   ICrypto,
   ICryptos,
   IHistorygram,
+  IMarqueeCotations,
 } from "../../../../application/types/crypto";
-import { ICryptosDto } from "../dtos/crypto.dto";
+import { ICryptosDto, IMarqueeCotationsDto } from "../dtos/crypto.dto";
 
 export const MapperFromApiCrypto = (cryptoFromApi: ICryptosDto): ICryptos => {
   let data: ICryptos = {};
   for (const crypto of cryptoFromApi) {
-    
-    
     const parsedHistorygram: Array<IHistorygram> = crypto.historygram.map(
       ({ amt, name, pv, uv }) => ({ amt, name, pv, uv })
     );
@@ -25,5 +24,17 @@ export const MapperFromApiCrypto = (cryptoFromApi: ICryptosDto): ICryptos => {
     };
   }
 
+  return data;
+};
+export const MapperFromApiCotations = (
+  cryptoFromApi: IMarqueeCotationsDto
+): IMarqueeCotations => {
+  const data: IMarqueeCotations = cryptoFromApi.map((c) => {
+    return {
+      change: c.change,
+      label: c.label,
+      value: c.value,
+    };
+  });
   return data;
 };
