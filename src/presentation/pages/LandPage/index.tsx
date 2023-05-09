@@ -10,11 +10,12 @@ import { TileComponent } from "../../shared/components/Tiles/Tile";
 import * as S from "./style";
 import { Col, Row, Container, useScreenClass, Hidden } from "react-grid-system";
 import { TopCryptoGridContainer } from "./containers/top-crypto-grid";
-import { Form } from "./form";
+import { Form } from "./containers/form";
 import { ModalSignIn } from "../../shared/dialogs/modal-signin";
 import { ICryptos } from "../../../application/types/crypto";
 import { getCryptosFromService } from "../../../application/services/crypto";
 import { CardContainer } from "./containers/cards";
+import { SpaceStyled } from "../../shared/components-styled/Space";
 
 export const LandPage = () => {
   const { showModal, hideModal } = useModal();
@@ -53,12 +54,13 @@ export const LandPage = () => {
 
       <Container>
         <Row>
-          <div className="block-130"></div>
+          <SpaceStyled size="50px" />
           <h4 className="center full-width w700">Top Cryptos</h4>
           <TopCryptoGridContainer cryptos={cryptos}></TopCryptoGridContainer>
-          <Form></Form>
         </Row>
       </Container>
+          <SpaceStyled size="50px" />
+      <Form></Form>
     </div>
   );
 };
