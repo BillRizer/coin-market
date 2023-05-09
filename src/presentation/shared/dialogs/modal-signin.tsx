@@ -31,7 +31,7 @@ export const ModalSignIn = ({}: Props) => {
 
     // validar campos
     if (!email || !password) {
-      setError("Por favor, preencha todos os campos");
+      setError("Please fill in all fields");
       return;
     }
     signIn({ email, password });

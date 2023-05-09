@@ -105,7 +105,7 @@ export const TopCryptoGridContainer = ({ cryptos }: Props) => {
               </S.Line>
             ))
           ) : (
-            <>not found</>
+            <div className="text-label full-width">Could not connect to api</div>
           )}
         </GridComponent>
         <div
@@ -114,13 +114,15 @@ export const TopCryptoGridContainer = ({ cryptos }: Props) => {
             setShowMore(!showMore);
           }}
         >
-          {!showMore ? (
-            <span className="pointer">
-              View more <span style={{ fontSize: "16px" }}>+ </span>
-            </span>
-          ) : (
-            <span className="pointer">View less</span>
-          )}
+          {cryptos &&
+            Object.keys(cryptos).length > 3 &&
+            (!showMore ? (
+              <span className="pointer">
+                View more <span style={{ fontSize: "16px" }}>+ </span>
+              </span>
+            ) : (
+              <span className="pointer">View less</span>
+            ))}
         </div>
       </S.Content>
     </>

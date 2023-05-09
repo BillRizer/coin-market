@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { ButtonComponent } from "../components/Button";
 import { InputComponent } from "../components/Input";
 import { SelectComponent } from "../components/Select";
@@ -9,23 +9,54 @@ import { CheckboxComponent } from "../components/Checkbox";
 import { useModal } from "../../../application/hook/modal";
 import { SpaceStyled } from "../components-styled/Space";
 import { ModalSignIn } from "./modal-signin";
+import { areEqual, isValidEmail } from "../../../global/utils/validator";
+import { useAuth } from "../../../application/hook/useAuth";
+import { IUser } from "../../../application/types/user";
+import { useNavigate } from "react-router-dom";
 
 interface Props {}
 
 export const ModalSignUp = ({}: Props) => {
+  const { signUp } = useAuth();
   const [name, setName] = useState<string>("");
   const { showModal, hideModal } = useModal();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [accept, setAccept] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    if (!name || !email || !password || !confirmPassword) {
-      setError("Por favor, preencha todos os campos");
-      return;
-    }
+  const handleSubmit = useCallback(
+    (e: any) => {
+      e.preventDefault();
+
+      if (!accept) {
+        setError("It is necessary to accept the terms");
+        return;
+      }
+      if (!name || !email || !password || !confirmPassword) {
+        setError("Please fill in all fields");
+        return;
+      }
+      if (!isValidEmail(email)) {
+        setError("Please fill in the correct e-mail");
+        return;
+      }
+      if (!areEqual(password, confirmPassword)) {
+        setError("Password and confirm password must be the same");
+        return;
+      }
+      const newUser: IUser = { name, email, password, avatar: "", wallet: {} };
+      signUp(newUser);
+      navigate("/private");
+      hideModal();
+    },
+    [name, email, password, confirmPassword, accept]
+  );
+
+  const handleOnChange = () => {
+    setAccept(!accept);
   };
   const handleSignInModal = () => {
     showModal({
@@ -79,7 +110,7 @@ export const ModalSignUp = ({}: Props) => {
           placeholder="Password"
           Icon={FiLock}
         />
-        <CheckboxComponent checked={false}>
+        <CheckboxComponent checked={false} onChange={handleOnChange}>
           I have read and accept the{" "}
           <b>Privacy Policy and Terms of User Sign up.</b>
         </CheckboxComponent>

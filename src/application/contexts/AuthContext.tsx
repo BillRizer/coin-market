@@ -39,6 +39,7 @@ export const AuthProvider = ({ children }: any) => {
   };
 
   const signUp = async (user: IUser) => {
+    //implemente new user here
     return getDefaultUser();
   };
   const getDefaultUser = async () => {
