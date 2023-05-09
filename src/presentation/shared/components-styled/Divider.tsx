@@ -7,4 +7,5 @@ export const DividerStyled = styled.div<{
   border-bottom: 1px solid ${({ theme }) => theme.colors.secondary.w200};
   ${({ marginTop }) => `margin-top:  ${marginTop}`};
   ${({ marginBottom }) => `margin-bottom:  ${marginBottom}`};
+  width: 100%;
 `;

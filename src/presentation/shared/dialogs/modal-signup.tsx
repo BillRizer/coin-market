@@ -4,36 +4,34 @@ import { InputComponent } from "../components/Input";
 import { SelectComponent } from "../components/Select";
 import { DividerStyled } from "../components-styled/Divider";
 import { IListCrypto } from "../../../application/types/crypto";
+import { FiLock, FiMail, FiUser } from "react-icons/fi";
+import { CheckboxComponent } from "../components/Checkbox";
+import { useModal } from "../../../application/hook/modal";
+import { SpaceStyled } from "../components-styled/Space";
+import { ModalSignIn } from "./modal-signin";
 
 interface Props {}
 
 export const ModalSignUp = ({}: Props) => {
-  const [cryptoSelected, setCryptoSelected] = useState<string>("");
-  const [quantity, setQuantity] = useState<string>("");
+  const [name, setName] = useState<string>("");
+  const { showModal, hideModal } = useModal();
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [error, setError] = useState("");
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log(quantity);
-    console.log(cryptoSelected);
-
-    // validar campos
-    if (!quantity || !cryptoSelected) {
+    if (!name || !email || !password || !confirmPassword) {
       setError("Por favor, preencha todos os campos");
       return;
     }
-    const quantityParsed: number = Number(quantity);
-    if (quantity.trim() === "" || isNaN(quantityParsed)) {
-      setError("Por favor, Informe uma quantidade válida.");
-      return;
-    }
-
-    if (quantityParsed <= 0) {
-      setError("Por favor, Quantidade deve ser positiva.");
-      return;
-    }
   };
-
+  const handleSignInModal = () => {
+    showModal({
+      body: <ModalSignIn />,
+    });
+  };
   return (
     <div>
       <h4 className="center ">
@@ -46,19 +44,58 @@ export const ModalSignUp = ({}: Props) => {
 
       <form onSubmit={handleSubmit}>
         <InputComponent
-          label="Quantity"
-          id="quantity"
-          type="number"
-          value={quantity}
-          onChange={setQuantity}
+          id="name"
+          type="text"
+          value={name}
+          onChange={setName}
           error={error}
-          placeholder="0,00"
-          min={0}
+          placeholder="Name"
+          Icon={FiUser}
         />
+        <InputComponent
+          id="email"
+          type="text"
+          value={email}
+          onChange={setEmail}
+          error={error}
+          placeholder="E-mail"
+          Icon={FiMail}
+        />
+        <InputComponent
+          id="password"
+          type="password"
+          value={password}
+          onChange={setPassword}
+          error={error}
+          placeholder="Password"
+          Icon={FiLock}
+        />
+        <InputComponent
+          id="password"
+          type="password"
+          value={confirmPassword}
+          onChange={setConfirmPassword}
+          error={error}
+          placeholder="Password"
+          Icon={FiLock}
+        />
+        <CheckboxComponent checked={false}>
+          I have read and accept the{" "}
+          <b>Privacy Policy and Terms of User Sign up.</b>
+        </CheckboxComponent>
         {error && <div className="text-label center">{error}</div>}
         <ButtonComponent color="primary" size="medium" className="full-width">
-          Add Crypto
+          Sign up
         </ButtonComponent>
+        <div className="full-width center text-small-label">
+          <span
+            className="w700 pointer center full-width"
+            onClick={handleSignInModal}
+          >
+            Sign in to <span className="color-primary">Coin</span>
+            <span className="color-sec-4">Synch</span>
+          </span>
+        </div>
       </form>
     </div>
   );

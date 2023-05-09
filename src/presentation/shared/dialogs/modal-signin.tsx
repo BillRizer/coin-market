@@ -20,7 +20,7 @@ export const ModalSignIn = ({}: Props) => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSignInModal = () => {
+  const handleSignUpModal = () => {
     showModal({
       body: <ModalSignUp />,
     });
@@ -51,7 +51,6 @@ export const ModalSignIn = ({}: Props) => {
 
       <form onSubmit={handleSubmit}>
         <InputComponent
-          label="Email"
           id="email"
           type="text"
           value={email}
@@ -61,7 +60,6 @@ export const ModalSignIn = ({}: Props) => {
           Icon={FiMail}
         />
         <InputComponent
-          label="Password"
           id="password"
           type="password"
           value={password}
@@ -76,7 +74,7 @@ export const ModalSignIn = ({}: Props) => {
         </ButtonComponent>
         <div className="text-small-label center">
           Don’t have an account?{" "}
-          <span className="w700 pointer" onClick={handleSignInModal}>
+          <span className="w700 pointer" onClick={handleSignUpModal}>
             Sign up to <span className="color-primary">Coin</span>
             <span className="color-sec-4">Synch</span>
           </span>
