@@ -36,9 +36,10 @@ export const NavComponent = ({ isLogged }: Props) => {
   }, [user]);
 
   const screenClass = useScreenClass();
+  const isMobile = ["xs", "sm"].includes(screenClass) ? true : false;
   const HamburguerComponent = () => {
     let styleInvertIcon = {};
-    if (!isLogged && screenClass === "sm") {
+    if (!isLogged && isMobile) {
       styleInvertIcon = { order: 2 };
     }
     return (
@@ -69,7 +70,7 @@ export const NavComponent = ({ isLogged }: Props) => {
         <Row>
           <Col lg={12}>
             <S.Navigation isLogged={isLogged}>
-              <Visible sm={true} md={isLogged}>
+              <Visible xs sm md={isLogged}>
                 <HamburguerComponent />
               </Visible>
 
@@ -84,7 +85,7 @@ export const NavComponent = ({ isLogged }: Props) => {
               {isLogged === true && (
                 <S.Item>
                   <AvatarComponent
-                    isCompact={screenClass === "sm"}
+                    isCompact={isMobile}
                     image={cacheUser?.avatar || ""}
                     name={cacheUser?.name || ""}
                     options={[
@@ -101,7 +102,7 @@ export const NavComponent = ({ isLogged }: Props) => {
               )}
               {isLogged === false && (
                 <S.Line>
-                  <Hidden sm>
+                  <Hidden xs sm>
                     <S.Menu className={isNavExpanded ? "expanded" : ""}>
                       <ul>
                         <li>
@@ -123,7 +124,7 @@ export const NavComponent = ({ isLogged }: Props) => {
                         className="p"
                         to={"#"}
                         onClick={handleSignInModal}
-                        style={{ marginRight: "24px",paddingLeft:'24px' }}
+                        style={{ marginRight: "24px", paddingLeft: "24px" }}
                       >
                         Sign in
                       </Link>
