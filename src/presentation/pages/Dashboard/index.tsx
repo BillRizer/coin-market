@@ -42,6 +42,7 @@ import { IWallet } from "../../../application/types/wallet";
 import { useModal } from "../../../application/hook/modal";
 import { ModalTransferCrypto } from "./modal-transfer-crypto";
 import { ModalAddCrypto } from "./modal-add-crypto";
+import { DividerStyled } from "../../shared/components-styled/Divider";
 
 export const DashboardPage = () => {
   const { user } = useAuth();
@@ -201,6 +202,9 @@ export const DashboardPage = () => {
           </Col>
         </Row>
         <Row>
+          <Visible xs sm>
+            <DividerStyled marginBottom="0px" marginTop="32px"></DividerStyled>
+          </Visible>
           <Col lg={12} md={8} sm={4}>
             <S.MyWalletContainer className="generic-box-shadow">
               <TitleRowComponent title="My Wallet" icon={IconMinimalistWallet}>
@@ -249,26 +253,26 @@ export const DashboardPage = () => {
                             </S.ItemCrypto>
                             <S.ItemHolding>
                               <Visible xs>
-                                <div className="text-label title">Holding</div>
+                                <S.ItemTitleMobile>Holding</S.ItemTitleMobile>
                               </Visible>
-                              <div className="text-label ">
+                              <S.ItemMoney className="w400">
                                 {calcHoldingText(
                                   crypto[index].unit,
                                   wallet[index].amount
                                 )}
-                              </div>
+                              </S.ItemMoney>
 
-                              <div className="text-small-label">
+                              <S.ItemBtc>
                                 {cotationText(
                                   wallet[index].amount,
                                   index as ICrytoAbbrev
                                 )}
-                              </div>
+                              </S.ItemBtc>
                             </S.ItemHolding>
 
                             <S.ItemChange>
                               <Visible xs>
-                                <div className="text-label">Change</div>
+                                <S.ItemTitleMobile>Change</S.ItemTitleMobile>
                               </Visible>
                               <NumberCotationComponent
                                 className="text-label"
@@ -279,7 +283,17 @@ export const DashboardPage = () => {
                             </S.ItemChange>
                             <S.ItemHolding>
                               {isMobile ? (
-                                <ButtonComponent></ButtonComponent>
+                                <ButtonComponent
+                                  size="small"
+                                  onClick={() =>
+                                    handleTradeModal(
+                                      index as ICrytoAbbrev,
+                                      crypto[index].label
+                                    )
+                                  }
+                                >
+                                  Trade
+                                </ButtonComponent>
                               ) : (
                                 <IconComponent
                                   Icon={iconTrade}

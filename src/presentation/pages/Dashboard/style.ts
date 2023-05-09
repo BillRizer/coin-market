@@ -42,6 +42,7 @@ export const Content = styled.div`
     min-height: 100px;
   }
 `;
+
 export const ItemCrypto = styled.div`
   display: flex;
   align-items: center;
@@ -64,13 +65,36 @@ export const ItemHolding = styled.div`
     margin: 0;
   }
   @media screen and (${device.mobile}) {
+    padding: 16px;
+    line-height: 20px;
+  }
+`;
+export const ItemTitleMobile = styled.div`
+  @media screen and (${device.mobile}) {
+    font-size: 12px;
+    color: ${({ theme }) => theme.colors.secondary.base};
   }
 `;
 
+export const ItemMoney = styled.div`
+  font-size: 14px;
+  color: ${({ theme }) => theme.colors.secondary.base};
+`;
+export const ItemBtc = styled.div`
+  font-size: 12px;
+  color: ${({ theme }) => theme.colors.primary.base};
+`;
 export const ItemChange = styled.div`
   margin: 0;
   display: flex;
   flex-direction: column;
+  border-top: 1px solid ${({ theme }) => theme.colors.secondary.w100};
+  margin: 0 16px;
+  padding-top: 16px;
+  div {
+    font-size: 14px;
+    margin-top: 5px;
+  }
 `;
 
 export const Actions = styled.div`
