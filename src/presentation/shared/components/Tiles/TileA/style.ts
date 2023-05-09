@@ -30,12 +30,12 @@ export const Right = styled.div<{ backgroundColor?: string }>`
   justify-content: center;
   @media screen and (${device.tablet}) {
     h3 {
-      font-size: ${convertPxToRem(24)};
+      font-size: 24px;
     }
   }
   @media screen and (${device.mobile}) {
     h3 {
-      font-size: ${convertPxToRem(16)};
+      font-size: 16px;
     }
   }
 `;
@@ -59,18 +59,6 @@ export const Thumb = styled.div<{ backgroundColor?: string }>`
     height: 32px;
     margin: 8px 8px 8px 16px;
   }
-  
-  @media screen and (${device.laptop}) {
-  background-color: blue;
-  }
-  @media screen and (${device.tablet}) {
-  background-color: green;
-  }
-  @media screen and (${device.mobile}) {
-  background-color: red;
-  }
-  
- 
   img {
     width: 50%;
     height: 50%;

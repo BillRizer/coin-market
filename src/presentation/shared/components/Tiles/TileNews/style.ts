@@ -42,7 +42,7 @@ export const Left = styled.div`
 `;
 
 export const Title = styled.div`
-  font-size: 14px;
+   & div{font-size: 14px;}
   
   grid-area: t;
   @media screen and (${device.mobile}) {

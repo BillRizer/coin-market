@@ -55,7 +55,7 @@ export const Amount = styled.div`
   display: flex;
   align-items: center;
   grid-area: a;
-  font-size: 14px;
+  & div{font-size: 14px;}
 `;
 
 export const Right = styled.div<{ backgroundColor?: string }>`
