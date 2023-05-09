@@ -6,3 +6,13 @@ services:
       - $PWD/fakeapi-mocks:/app/mocks
     ports:
       - "3030:3030"
+
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    environment:
+      - NODE_ENV=development
+    restart: always

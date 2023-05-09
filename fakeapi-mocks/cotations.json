@@ -1,0 +1,21 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/v1/my-wallet"
+  },
+  "response": {
+    "body": {
+      "message": "",
+      "isSuccess": true,
+      "errors": [],
+      "data": [
+        { "label": "BIT", "value": 23.63, "change": 1.6 },
+        { "label": "DOG", "value": 3.63, "change": 1.1 },
+        { "label": "ETH", "value": 7.6, "change": -43.3 },
+        { "label": "SOL", "value": 11.69, "change": -2 },
+        { "label": "XLM", "value": 100.63, "change": 10.1 },
+        { "label": "ABC", "value": 10, "change": 1.1 }
+      ]
+    }
+  }
+}
